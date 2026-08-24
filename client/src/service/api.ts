@@ -2,7 +2,7 @@ import axios from "axios";
 import type { GithubRepo, UserProfile } from "../types/repository";
 
 const API = axios.create({
-  baseURL: "http://localhost:8080/api",
+  baseURL: "https://gitsage-api.onrender.com/api",
 });
 
 // Fetch User Profile by User UUID or Username
@@ -81,3 +81,4 @@ export const chatWithCodebase = async (userId: string, threadId: string, repoNam
   
   return response.data as { answer: string; source: string[] };
 };
+

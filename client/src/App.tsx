@@ -72,7 +72,7 @@ export function App() {
     }
   };
   const handleGitHubLogin = () => {
-    window.location.href = "http://localhost:8080/oauth2/authorization/github";
+    window.location.href = "https://gitsage-api.onrender.com/oauth2/authorization/github";
   };
   const handleLogout = () => {
     localStorage.removeItem("devLink_userId");
@@ -138,4 +138,5 @@ export function App() {
   );
 }
 export default App;
+
 
