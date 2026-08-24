@@ -4,7 +4,6 @@ import { chatWithCodebase, ingestRepository, createChatThread, fetchChatThreads,
 import { FormattedMarkdown } from "./FormattedMarkdown";
 import {
   ArrowLeft,
-  Send,
   Loader2,
   Copy,
   RotateCcw,
@@ -54,7 +53,7 @@ export const ChatWorkspace = ({ userId, repo, onBack }: ChatWorkspaceProps) => {
   }, [messages, isSending]);
   useEffect(() => {
     if (isIngesting) {
-      const targetFiles = Math.floor(Math.random() * 50) + 20; // Simulated total
+      const targetFiles = Math.floor(Math.random() * 50) + 20; 
       setTotalFiles(targetFiles);
       const interval = setInterval(() => {
         setProcessedFiles((prev) => {
@@ -89,7 +88,7 @@ export const ChatWorkspace = ({ userId, repo, onBack }: ChatWorkspaceProps) => {
         const defaultBranch = repo.default_branch || "main";
         await ingestRepository(userId, repo.name, owner, defaultBranch);
         if (isMounted) {
-          setProcessedFiles(totalFiles); // finish progress
+          setProcessedFiles(totalFiles); 
           setTimeout(() => setIsIngesting(false), 800);
         }
       } catch (err) {
@@ -281,7 +280,7 @@ export const ChatWorkspace = ({ userId, repo, onBack }: ChatWorkspaceProps) => {
           </div>
         </div>
         <div className="flex-1 overflow-y-auto px-6 lg:px-24 xl:px-48 py-8 space-y-8 scroll-smooth">
-          {messages.map((msg, idx) => (
+          {messages.map((msg) => (
             <div key={msg.id} className="w-full flex flex-col">
               {msg.sender === "user" ? (
                 <div className="self-end max-w-[80%] bg-[#1e1e1e] text-white px-5 py-3 rounded-2xl rounded-tr-sm text-[15px] leading-relaxed shadow-sm">
