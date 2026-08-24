@@ -5,6 +5,7 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.oauth2.client.OAuth2AuthorizedClient;
 import org.springframework.security.oauth2.client.OAuth2AuthorizedClientService;
@@ -16,7 +17,9 @@ import java.io.IOException;
 @Component
 public class OAuth2SuccessHandler extends SimpleUrlAuthenticationSuccessHandler {
     private final UserService userService;
-    private final OAuth2AuthorizedClientService  oAuth2AuthorizedClientService;
+    private final OAuth2AuthorizedClientService oAuth2AuthorizedClientService;
+    @Value("${FRONTEND_URL:http://localhost:5173}")
+    private String frontendUrl;
     @Autowired
     public OAuth2SuccessHandler(UserService userService, OAuth2AuthorizedClientService oAuth2AuthorizedClientService) {
         this.userService = userService;
@@ -30,7 +33,6 @@ public class OAuth2SuccessHandler extends SimpleUrlAuthenticationSuccessHandler 
                 oauthToken.getAuthorizedClientRegistrationId(), oauthToken.getName());
         String accessToken = client.getAccessToken().getTokenValue();
         UserDto userDto = userService.processOAuthPostLogin(oAuthUser, accessToken);
-        getRedirectStrategy().sendRedirect(request, response, "http://localhost:5173/?userId=" + userDto.getId());
+        getRedirectStrategy().sendRedirect(request, response, frontendUrl + "/?userId=" + userDto.getId());
     }
 }
-

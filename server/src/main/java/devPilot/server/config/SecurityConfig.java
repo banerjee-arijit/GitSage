@@ -1,5 +1,6 @@
 package devPilot.server.config;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpStatus;
@@ -17,6 +18,8 @@ import java.util.List;
 @EnableWebSecurity
 public class SecurityConfig {
     private final OAuth2SuccessHandler oAuth2SuccessHandler;
+    @Value("${FRONTEND_URL:http://localhost:5173}")
+    private String frontendUrl;
     @Autowired
     public SecurityConfig(OAuth2SuccessHandler oAuth2SuccessHandler) {
         this.oAuth2SuccessHandler = oAuth2SuccessHandler;
@@ -44,7 +47,7 @@ public class SecurityConfig {
     @Bean
     public CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration configuration = new CorsConfiguration();
-        configuration.setAllowedOrigins(List.of("http://localhost:5173"));
+        configuration.setAllowedOriginPatterns(List.of(frontendUrl, "https://*.pages.dev"));
         configuration.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "OPTIONS"));
         configuration.setAllowedHeaders(List.of("*"));
         configuration.setAllowCredentials(true);
@@ -53,4 +56,3 @@ public class SecurityConfig {
         return source;
     }
 }
-
