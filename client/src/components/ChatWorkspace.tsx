@@ -335,7 +335,7 @@ export const ChatWorkspace = ({ userId, repo, onBack }: ChatWorkspaceProps) => {
                   <span className="w-3.5 h-3.5 rounded-full bg-neutral-700 flex items-center justify-center">
                     <span className="text-[8px]">✨</span>
                   </span>
-                  Gemini 2.5 Flash
+                  Gemini 3.6 Flash
                   <ChevronDown className="w-3 h-3 text-neutral-500" />
                 </button>
               </div>
@@ -358,4 +358,5 @@ export const ChatWorkspace = ({ userId, repo, onBack }: ChatWorkspaceProps) => {
     </div>
   );
 };
+
 

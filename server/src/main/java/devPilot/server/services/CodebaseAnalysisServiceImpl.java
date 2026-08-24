@@ -142,7 +142,7 @@ public class CodebaseAnalysisServiceImpl implements CodebaseAnalysisService {
                 org.springframework.ai.openai.api.OpenAiApi openAiApi = 
                         new org.springframework.ai.openai.api.OpenAiApi("https://generativelanguage.googleapis.com/v1beta/openai", customApiKey);
                 org.springframework.ai.openai.OpenAiChatOptions options = 
-                        org.springframework.ai.openai.OpenAiChatOptions.builder().model("gemini-2.5-flash").build();
+                        org.springframework.ai.openai.OpenAiChatOptions.builder().model("gemini-3.6-flash").build();
                 org.springframework.ai.openai.OpenAiChatModel dynamicChatModel = 
                         new org.springframework.ai.openai.OpenAiChatModel(openAiApi, options);
                 activeClient = ChatClient.builder(dynamicChatModel).build();
@@ -204,4 +204,5 @@ public class CodebaseAnalysisServiceImpl implements CodebaseAnalysisService {
                 || lower.endsWith(".xml") || lower.endsWith(".properties") || lower.endsWith(".md");
     }
 }
+
 

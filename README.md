@@ -1,6 +1,6 @@
-﻿<div align="center">
+<div align="center">
   <h1>GitSage</h1>
-  <p><strong>Chat with any GitHub codebase. Powered by Spring AI & Gemini 2.5 Flash.</strong></p>
+  <p><strong>Chat with any GitHub codebase. Powered by Spring AI & Gemini 3.6 Flash.</strong></p>
 </div>
 
 ---
@@ -12,7 +12,7 @@
 - **GitHub OAuth Integration:** Securely log in with GitHub to instantly sync and access all your public and private repositories.
 - **Explore Mode (Bypass Auth):** Search for any GitHub user globally and instantly browse their public repositories without needing to log in.
 - **Smart Codebase RAG:** In-memory document storage paired with TF-IDF keyword ranking extracts the most relevant source files to answer your questions.
-- **Powered by Gemini 2.5 Flash:** Deep code reasoning backed by Google's fastest Gemini model.
+- **Powered by Gemini 3.6 Flash:** Deep code reasoning backed by Google's fastest Gemini model.
 - **Bring Your Own Key (BYOK):** Production-ready. Users can provide their own Gemini API keys via a secure, privacy-guaranteed local storage modal.
 - **Persistent Chat History:** Seamlessly pick up where you left off. All chat threads, messages, and file citations are persisted via MySQL.
 - **Blazing Fast Frontend:** Built with React, Vite, and Tailwind CSS. Highly optimized with lazy-loaded code-splitting for near-instant initial page loads.
@@ -63,7 +63,7 @@ spring.security.oauth2.client.registration.github.client-secret=YOUR_GITHUB_CLIE
 # Gemini (Spring AI OpenAI configuration)
 spring.ai.openai.api-key=YOUR_GEMINI_API_KEY
 spring.ai.openai.base-url=https://generativelanguage.googleapis.com/v1beta/openai
-spring.ai.openai.chat.options.model=gemini-2.5-flash
+spring.ai.openai.chat.options.model=gemini-3.6-flash
 \\\
 
 Run the Spring Boot application:
@@ -87,3 +87,4 @@ GitSage respects user privacy. By default, the application allows users to injec
 
 ## License
 This project is licensed under the MIT License.
+
