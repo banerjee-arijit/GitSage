@@ -168,7 +168,7 @@ export const LandingPage = ({ onConnectGithub, onLogin, onExplore }: LandingPage
                   if (onExplore) {
                     onExplore();
                   } else {
-                    window.location.reload(); // Fallback if no prop provided
+                    window.location.reload(); 
                   }
                 }}
                 className="flex items-center gap-4 p-4 bg-[#141414] hover:bg-[#1a1a1a] rounded-2xl cursor-pointer transition-all active:scale-[0.98] shadow-sm"
