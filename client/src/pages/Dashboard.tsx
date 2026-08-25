@@ -98,7 +98,7 @@ export const Dashboard = ({
         {isApiKeyModalOpen && (
           <div className="fixed inset-0 z-[100] flex items-center justify-center bg-black/60 backdrop-blur-md animate-fade px-4">
             <div className="bg-[#0c0c0e] w-full max-w-md rounded-3xl p-8 shadow-[0_20px_60px_-15px_rgba(0,0,0,1)] relative">
-              {localStorage.getItem("devLink_customApiKey") && (
+              
                 <button 
                   onClick={() => setIsApiKeyModalOpen(false)}
                   className="absolute top-5 right-5 text-neutral-500 hover:text-white transition-colors cursor-pointer"
@@ -107,7 +107,6 @@ export const Dashboard = ({
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
                   </svg>
                 </button>
-              )}
               <h3 className="text-2xl font-light text-white mb-2">Bring Your Own Key</h3>
               <p className="text-sm text-[#a7a6a6] mb-6 font-light">
                 To use the AI codebase chat, please provide a valid Google Gemini API key.
@@ -205,3 +204,4 @@ export const Dashboard = ({
     </div>
   );
 };
+
