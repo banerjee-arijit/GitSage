@@ -23,15 +23,33 @@ export const Dashboard = ({
   const [filterType, setFilterType] = useState<"all" | "public" | "private">("all");
   const [isApiKeyModalOpen, setIsApiKeyModalOpen] = useState(() => !localStorage.getItem("devLink_customApiKey"));
   const [apiKeyInput, setApiKeyInput] = useState(() => localStorage.getItem("devLink_customApiKey") || "");
+  const [hasKey, setHasKey] = useState<boolean>(!!localStorage.getItem("devLink_customApiKey"));
+  const [isValidatingKey, setIsValidatingKey] = useState(false);
+  const [keyError, setKeyError] = useState<string | null>(null);
   const [analyzingRepoId, setAnalyzingRepoId] = useState<number | null>(null);
 
-  const handleSaveApiKey = () => {
-    if (apiKeyInput.trim()) {
-      localStorage.setItem("devLink_customApiKey", apiKeyInput.trim());
-    } else {
+  const handleSaveApiKey = async () => {
+    if (!apiKeyInput.trim()) {
       localStorage.removeItem("devLink_customApiKey");
+      setHasKey(false);
+      setIsApiKeyModalOpen(false);
+      return;
     }
-    setIsApiKeyModalOpen(false);
+    
+    setIsValidatingKey(true);
+    setKeyError(null);
+    try {
+      const res = await fetch(`https://generativelanguage.googleapis.com/v1beta/models?key=${apiKeyInput.trim()}`);
+      if (!res.ok) throw new Error("Invalid key");
+      
+      localStorage.setItem("devLink_customApiKey", apiKeyInput.trim());
+      setHasKey(true);
+      setIsApiKeyModalOpen(false);
+    } catch (e) {
+      setKeyError("Invalid Google Gemini API Key.");
+    } finally {
+      setIsValidatingKey(false);
+    }
   };
 
   const handleAnalyzeClick = (repo: GithubRepo) => {
@@ -86,13 +104,14 @@ export const Dashboard = ({
                 <svg className="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 7a2 2 0 012 2m4 0a6 6 0 01-7.743 5.743L11 17H9v2H7v2H4a1 1 0 01-1-1v-2.586a1 1 0 01.293-.707l5.964-5.964A6 6 0 1121 9z" />
                 </svg>
-                <span>{localStorage.getItem("devLink_customApiKey") ? "Update Key" : "Set API Key"}</span>
+                <span>{hasKey ? "Update Key" : "Set API Key"}</span>
               </button>
-              {localStorage.getItem("devLink_customApiKey") && (
+              {hasKey && (
                 <button
                   onClick={() => {
                     localStorage.removeItem("devLink_customApiKey");
                     setApiKeyInput("");
+                    setHasKey(false);
                   }}
                   className="p-1.5 text-neutral-400 hover:text-red-400 hover:bg-red-500/10 rounded-full transition-all cursor-pointer"
                   title="Remove Key"
@@ -144,17 +163,39 @@ export const Dashboard = ({
                 <input
                   type="password"
                   value={apiKeyInput}
-                  onChange={(e) => setApiKeyInput(e.target.value)}
+                  onChange={(e) => {
+                    setApiKeyInput(e.target.value);
+                    setKeyError(null);
+                  }}
                   placeholder="AIzaSy..."
-                  className="w-full sm:flex-1 bg-transparent border-none px-4 py-2 text-sm text-white focus:outline-none focus:ring-0 placeholder:text-neutral-600"
+                  disabled={isValidatingKey}
+                  className="w-full sm:flex-1 bg-transparent border-none px-4 py-2 text-sm text-white focus:outline-none focus:ring-0 placeholder:text-neutral-600 disabled:opacity-50"
                 />
                 <button
                   onClick={handleSaveApiKey}
-                  className="w-full sm:w-auto bg-[#fdba74] text-black px-6 py-2.5 rounded-full text-sm font-semibold hover:bg-[#fb923c] transition-all cursor-pointer shadow-md"
+                  disabled={isValidatingKey || !apiKeyInput.trim()}
+                  className="w-full sm:w-auto bg-[#fdba74] text-black px-6 py-2.5 rounded-full text-sm font-semibold hover:bg-[#fb923c] transition-all cursor-pointer shadow-md flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed"
                 >
-                  Save Key
+                  {isValidatingKey && <Loader2 className="w-4 h-4 animate-spin" />}
+                  {hasKey ? "Update Key" : "Save Key"}
                 </button>
               </div>
+              {keyError && (
+                <p className="text-red-400 text-xs text-center mt-2 font-medium">{keyError}</p>
+              )}
+              {hasKey && (
+                <button
+                  onClick={() => {
+                    localStorage.removeItem("devLink_customApiKey");
+                    setApiKeyInput("");
+                    setHasKey(false);
+                    setIsApiKeyModalOpen(false);
+                  }}
+                  className="w-full mt-3 bg-red-500/10 text-red-400 border border-red-500/20 px-6 py-2.5 rounded-full text-sm font-semibold hover:bg-red-500/20 transition-all cursor-pointer shadow-md"
+                >
+                  Delete Key
+                </button>
+              )}
               <p className="text-[11px] text-neutral-500 text-center mt-4">
                 Don't have one? <a href="https://aistudio.google.com/app/apikey" target="_blank" rel="noreferrer" className="text-[#fdba74] hover:underline">Get a free key from Google AI Studio</a>
               </p>
@@ -225,6 +266,7 @@ export const Dashboard = ({
     </div>
   );
 };
+
 
 
 
