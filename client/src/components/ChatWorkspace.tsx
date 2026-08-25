@@ -217,7 +217,7 @@ export const ChatWorkspace = ({ userId, repo, onBack }: ChatWorkspaceProps) => {
   if (isIngesting) {
     const progressPercent = totalFiles > 0 ? Math.min((processedFiles / totalFiles) * 100, 100) : 0;
     return (
-      <div className="min-h-screen bg-[#050505] text-[#fafafa] flex flex-col items-center justify-center font-sans selection:bg-orange-300/30 selection:text-orange-200">
+      <div className="min-h-screen bg-[#050505] text-[#fafafa] flex flex-col items-center justify-center font-sans selection:bg-orange-300/30 selection:text-[#1c6cc1]">
         <div className="max-w-md w-full px-6 flex flex-col items-center animate-fade text-center">
           <div className="w-14 h-14 rounded-2xl bg-[#141414] flex items-center justify-center mb-8 shadow-xl border border-white/5">
             <Loader2 className="w-6 h-6 text-neutral-400 animate-spin" />
@@ -230,7 +230,7 @@ export const ChatWorkspace = ({ userId, repo, onBack }: ChatWorkspaceProps) => {
           </p>
           <div className="w-full max-w-[300px] h-1.5 bg-[#141414] rounded-full overflow-hidden mb-6 border border-white/5">
             <div 
-              className="h-full bg-[#fdba74] rounded-full transition-all duration-300 ease-out"
+              className="h-full bg-[#1c6cc1] rounded-full transition-all duration-300 ease-out"
               style={{ width: `${progressPercent}%` }}
             />
           </div>
@@ -242,7 +242,7 @@ export const ChatWorkspace = ({ userId, repo, onBack }: ChatWorkspaceProps) => {
     );
   }
   return (
-    <div className="h-screen bg-[#000000] text-[#fafafa] flex font-sans selection:bg-orange-300/30 selection:text-orange-200 overflow-hidden">
+    <div className="h-screen bg-[#000000] text-[#fafafa] flex font-sans selection:bg-orange-300/30 selection:text-[#1c6cc1] overflow-hidden">
       {isSidebarOpen && (
         <div className="hidden md:flex w-64 bg-[#050505] border-r border-[#1a1a1a] flex-col shrink-0 animate-fade">
           <div className="p-4 flex items-center justify-between border-b border-[#1a1a1a]">
@@ -340,14 +340,14 @@ export const ChatWorkspace = ({ userId, repo, onBack }: ChatWorkspaceProps) => {
           ))}
           {isSending && (
             <div className="w-full self-start text-neutral-400 text-[15px] animate-pulse flex items-center gap-2">
-               <Loader2 className="w-4 h-4 animate-spin text-orange-300" />
+               <Loader2 className="w-4 h-4 animate-spin text-[#1c6cc1]" />
                {thinkingText}
             </div>
           )}
           <div ref={messagesEndRef} className="h-24" />
         </div>
         <div className="absolute bottom-6 left-0 right-0 px-4 sm:px-6 lg:px-24 xl:px-48 flex justify-center w-full">
-          <div className="w-full max-w-4xl bg-[#18181b] rounded-[24px] border border-[#2a2a2a] p-2 flex flex-col shadow-2xl relative transition-all focus-within:border-[#fdba74]/50 focus-within:ring-1 focus-within:ring-[#fdba74]/20">
+          <div className="w-full max-w-4xl bg-[#18181b] rounded-[24px] border border-[#2a2a2a] p-2 flex flex-col shadow-2xl relative transition-all focus-within:border-[#1c6cc1]/50 focus-within:ring-1 focus-within:ring-[#1c6cc1]/20">
             <input
               type="text"
               value={inputQuestion}
@@ -377,7 +377,7 @@ export const ChatWorkspace = ({ userId, repo, onBack }: ChatWorkspaceProps) => {
                 <button 
                   onClick={() => handleSendMessage()}
                   disabled={!inputQuestion.trim() || isSending}
-                  className="w-8 h-8 rounded-full bg-[#fdba74] hover:bg-[#fb923c] disabled:bg-[#27272a] disabled:text-neutral-400 text-white flex items-center justify-center transition-colors cursor-pointer disabled:cursor-not-allowed shadow-md"
+                  className="w-8 h-8 rounded-full bg-[#1c6cc1] hover:bg-[#155498] disabled:bg-[#27272a] disabled:text-neutral-400 text-white flex items-center justify-center transition-colors cursor-pointer disabled:cursor-not-allowed shadow-md"
                 >
                   <ArrowLeft className="w-4 h-4 rotate-90" />
                 </button>

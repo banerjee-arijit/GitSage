@@ -69,7 +69,7 @@ export const LandingPage = ({ onConnectGithub, onLogin, onExplore }: LandingPage
             aria-hidden="true"
           >
             <source
-              src="https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260808_112712_da9d53df-6d27-4b12-bdf6-aa9dc2622bdf.mp4"
+              src="https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260613_180732_a54afbf6-b30d-470e-861f-669871f09f67.mp4"
               type="video/mp4"
             />
           </video>
@@ -88,18 +88,18 @@ export const LandingPage = ({ onConnectGithub, onLogin, onExplore }: LandingPage
             }}
           />
         </div>
-        <div className="relative z-10 container mx-auto max-w-7xl px-6 pt-36 flex-grow flex flex-col justify-center">
+        <div className="relative z-10 container mx-auto max-w-7xl px-6 pt-6 flex-grow flex flex-col justify-center">
           <main className="max-w-2xl">
-            <h1 className="text-5xl sm:text-7xl font-normal tracking-tight leading-[1.08] text-white">
-              <span className="block">Chat Directly with</span>
-              <span className="block font-normal text-orange-300">
-                Your Codebase
+            <h1 className="text-5xl sm:text-7xl font-light tracking-tight leading-[1.08] text-white">
+              <span className="block">Chat Directly with Your</span>
+              <span className="block font-normal text-[#1c6cc1]">
+                Codebase
               </span>
             </h1>
             <p className="mt-8 text-base sm:text-lg font-normal text-neutral-300 leading-relaxed max-w-xl">
               Connect your GitHub account, select any public or private
               repository, and ask AI anything about your code with grounded
-              Gemini 1.5 Flash intelligence.
+              Gemini 3.6 Flash intelligence.
             </p>
             <div className="mt-10 flex flex-wrap items-center gap-6">
               <button
@@ -153,7 +153,7 @@ export const LandingPage = ({ onConnectGithub, onLogin, onExplore }: LandingPage
               <button
                 type="submit"
                 disabled={isSearching || !searchUrl.trim()}
-                className="bg-[#fdba74] text-white px-6 py-2.5 rounded-full text-sm font-medium hover:bg-[#fb923c] transition-all cursor-pointer disabled:opacity-50 shadow-md"
+                className="bg-[#1c6cc1] text-white px-6 py-2.5 rounded-full text-sm font-medium hover:bg-[#155498] transition-all cursor-pointer disabled:opacity-50 shadow-md"
               >
                 {isSearching ? "..." : "Search"}
               </button>
@@ -182,7 +182,7 @@ export const LandingPage = ({ onConnectGithub, onLogin, onExplore }: LandingPage
                     <span>{searchedProfile.followers} Followers</span>
                   </div>
                 </div>
-                <div className="w-8 h-8 rounded-full bg-[#fdba74]/10 flex items-center justify-center text-orange-300">
+                <div className="w-8 h-8 rounded-full bg-[#1c6cc1]/10 flex items-center justify-center text-[#1c6cc1]">
                   <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
                   </svg>
@@ -232,7 +232,7 @@ export const LandingPage = ({ onConnectGithub, onLogin, onExplore }: LandingPage
                 03
               </div>
               <h3 className="text-xl font-medium text-white mb-2">
-                Gemini 1.5 RAG Chat
+                Gemini 3.6 Flash RAG Chat
               </h3>
               <p className="text-sm text-neutral-300 leading-relaxed font-normal">
                 Query your entire codebase with grounded AI responses, file
@@ -291,7 +291,7 @@ export const LandingPage = ({ onConnectGithub, onLogin, onExplore }: LandingPage
               </h3>
               <p className="text-sm text-neutral-300 mt-2 leading-relaxed font-normal">
                 When you select a repository to analyze, devLink indexes your
-                code files into Spring AI vector stores and uses Gemini 1.5
+                code files into Spring AI vector stores and uses Gemini 3.6 Flash
                 Flash RAG to answer queries with precise file citations.
               </p>
             </div>

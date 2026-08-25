@@ -174,7 +174,7 @@ export const Dashboard = ({
                 <button
                   onClick={handleSaveApiKey}
                   disabled={isValidatingKey || !apiKeyInput.trim()}
-                  className="w-full sm:w-auto bg-[#fdba74] text-black px-6 py-2.5 rounded-full text-sm font-semibold hover:bg-[#fb923c] transition-all cursor-pointer shadow-md flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed"
+                  className="w-full sm:w-auto bg-[#1c6cc1] text-white px-6 py-2.5 rounded-full text-sm font-semibold hover:bg-[#155498] transition-all cursor-pointer shadow-md flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed"
                 >
                   {isValidatingKey && <Loader2 className="w-4 h-4 animate-spin" />}
                   {hasKey ? "Update Key" : "Save Key"}
@@ -197,7 +197,7 @@ export const Dashboard = ({
                 </button>
               )}
               <p className="text-xs text-neutral-400 text-center mt-4">
-                Don't have one? <a href="https://aistudio.google.com/app/apikey" target="_blank" rel="noreferrer" className="text-orange-300 hover:underline">Get a free key from Google AI Studio</a>
+                Don't have one? <a href="https://aistudio.google.com/app/apikey" target="_blank" rel="noreferrer" className="text-[#1c6cc1] hover:underline">Get a free key from Google AI Studio</a>
               </p>
             </div>
           </div>
