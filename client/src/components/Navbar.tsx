@@ -1,5 +1,6 @@
 import type { UserProfile } from "../types/repository";
 import { BrandMark } from "./BrandMark";
+import { Home } from "lucide-react";
 
 const GithubIcon = ({ className = "w-4 h-4" }: { className?: string }) => (
   <svg className={className} fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
@@ -13,14 +14,14 @@ interface NavbarProps {
   onLogout?: () => void;
   isDashboard?: boolean;
 }
-export const Navbar = ({ onLogin, isDashboard = false }: NavbarProps) => {
+export const Navbar = ({ onLogin, onLogout, isDashboard = false }: NavbarProps) => {
   return (
     <header className="fixed top-0 left-0 right-0 z-50 w-full bg-[#050505]/60 backdrop-blur-md border-b border-white/10 transition-all duration-300">
       <div className="container mx-auto flex h-16 max-w-7xl items-center justify-between px-6">
-        <a href="/" className="flex items-center gap-3 transition-opacity hover:opacity-80">
+        <button onClick={onLogout} className="flex items-center gap-3 transition-opacity hover:opacity-80 cursor-pointer">
           <BrandMark className="w-6 h-9" />
           <span className="text-sm font-semibold tracking-widest uppercase text-white">GITSAGE</span>
-        </a>
+        </button>
         {!isDashboard && (
           <nav className="hidden md:flex items-center gap-8 text-sm font-normal text-[#b6b5b5]">
             <a href="#about" className="hover:text-white transition-colors">
@@ -35,7 +36,15 @@ export const Navbar = ({ onLogin, isDashboard = false }: NavbarProps) => {
           </nav>
         )}
         <div className="flex items-center gap-3">
-          {!isDashboard && (
+          {isDashboard ? (
+            <button
+              onClick={onLogout}
+              className="flex items-center gap-2 px-4 py-2 bg-[#121215] text-white rounded-full text-xs font-medium hover:bg-neutral-800 transition-all shadow-md cursor-pointer border border-white/10"
+            >
+              <Home className="w-3.5 h-3.5" />
+              <span>Back to Home</span>
+            </button>
+          ) : (
             <button
               onClick={onLogin}
               className="h-9 px-5 bg-white text-[#050505] hover:bg-neutral-200 text-xs font-semibold rounded-full transition-all shadow-md active:scale-95 flex items-center gap-2 cursor-pointer"
