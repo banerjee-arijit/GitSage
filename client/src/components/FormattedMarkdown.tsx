@@ -15,7 +15,7 @@ export const FormattedMarkdown = ({ content }: FormattedMarkdownProps) => {
     return parts.map((part, idx) => {
       if (part.startsWith("**") && part.endsWith("**")) {
         return (
-          <strong key={idx} className="font-semibold text-foreground">
+          <strong key={idx} className="font-semibold text-white">
             {part.slice(2, -2)}
           </strong>
         );
@@ -24,7 +24,7 @@ export const FormattedMarkdown = ({ content }: FormattedMarkdownProps) => {
         return (
           <code
             key={idx}
-            className="px-1.5 py-0.5 rounded bg-foreground/10 text-sky-300 font-mono text-xs border border-border"
+            className="px-1.5 py-0.5 rounded bg-white/10 text-sky-300 font-mono text-xs border border-white/10"
           >
             {part.slice(1, -1)}
           </code>
@@ -36,7 +36,7 @@ export const FormattedMarkdown = ({ content }: FormattedMarkdownProps) => {
   const blocks = content.split(/(```[\s\S]*?```)/g);
   let codeBlockCounter = 0;
   return (
-    <div className="space-y-3 text-sm leading-relaxed text-secondary-foreground">
+    <div className="space-y-3 text-sm leading-relaxed text-neutral-200">
       {blocks.map((block, bIdx) => {
         if (block.startsWith("```") && block.endsWith("```")) {
           const currentCodeIdx = codeBlockCounter++;
@@ -47,18 +47,18 @@ export const FormattedMarkdown = ({ content }: FormattedMarkdownProps) => {
           return (
             <div
               key={bIdx}
-              className="my-4 rounded-xl bg-[#050507] border border-border overflow-hidden shadow-2xl font-mono text-xs"
+              className="my-4 rounded-xl bg-[#050507] border border-white/10 overflow-hidden shadow-2xl font-mono text-xs"
             >
-              <div className="flex items-center justify-between px-4 py-2 bg-foreground/5 border-b border-border text-muted-foreground">
+              <div className="flex items-center justify-between px-4 py-2 bg-white/5 border-b border-white/10 text-neutral-400">
                 <div className="flex items-center gap-2">
                   <Code2 className="w-3.5 h-3.5 text-sky-400" />
-                  <span className="uppercase tracking-wider text-[11px] font-semibold text-secondary-foreground">
+                  <span className="uppercase tracking-wider text-[11px] font-semibold text-neutral-300">
                     {lang}
                   </span>
                 </div>
                 <button
                   onClick={() => handleCopy(codeText, currentCodeIdx)}
-                  className="flex items-center gap-1.5 px-2.5 py-1 rounded bg-foreground/5 hover:bg-foreground/10 text-secondary-foreground transition-all text-[11px] cursor-pointer"
+                  className="flex items-center gap-1.5 px-2.5 py-1 rounded bg-white/5 hover:bg-white/10 text-neutral-300 transition-all text-[11px] cursor-pointer"
                 >
                   {copiedIndex === currentCodeIdx ? (
                     <>
@@ -87,21 +87,21 @@ export const FormattedMarkdown = ({ content }: FormattedMarkdownProps) => {
               if (!trimmed) return <div key={lIdx} className="h-1.5" />;
               if (trimmed.startsWith("### ")) {
                 return (
-                  <h3 key={lIdx} className="text-base font-semibold text-foreground pt-2 pb-1 border-b border-border">
+                  <h3 key={lIdx} className="text-base font-semibold text-white pt-2 pb-1 border-b border-white/10">
                     {parseInline(trimmed.slice(4))}
                   </h3>
                 );
               }
               if (trimmed.startsWith("## ")) {
                 return (
-                  <h2 key={lIdx} className="text-lg font-bold text-foreground pt-3 pb-1 border-b border-border">
+                  <h2 key={lIdx} className="text-lg font-bold text-white pt-3 pb-1 border-b border-white/10">
                     {parseInline(trimmed.slice(3))}
                   </h2>
                 );
               }
               if (trimmed.startsWith("# ")) {
                 return (
-                  <h1 key={lIdx} className="text-xl font-extrabold text-foreground pt-3 pb-1">
+                  <h1 key={lIdx} className="text-xl font-extrabold text-white pt-3 pb-1">
                     {parseInline(trimmed.slice(2))}
                   </h1>
                 );
@@ -110,10 +110,10 @@ export const FormattedMarkdown = ({ content }: FormattedMarkdownProps) => {
               if (matchOrdered) {
                 return (
                   <div key={lIdx} className="flex items-start gap-2.5 pl-2 py-0.5">
-                    <span className="shrink-0 w-5 h-5 rounded-full bg-foreground/10 text-sky-300 font-mono text-xs flex items-center justify-center font-bold">
+                    <span className="shrink-0 w-5 h-5 rounded-full bg-white/10 text-sky-300 font-mono text-xs flex items-center justify-center font-bold">
                       {matchOrdered[1]}
                     </span>
-                    <p className="flex-1 text-secondary-foreground">{parseInline(matchOrdered[2])}</p>
+                    <p className="flex-1 text-neutral-200">{parseInline(matchOrdered[2])}</p>
                   </div>
                 );
               }
@@ -121,12 +121,12 @@ export const FormattedMarkdown = ({ content }: FormattedMarkdownProps) => {
                 return (
                   <div key={lIdx} className="flex items-start gap-2.5 pl-3 py-0.5">
                     <span className="shrink-0 w-1.5 h-1.5 rounded-full bg-sky-400 mt-2" />
-                    <p className="flex-1 text-secondary-foreground">{parseInline(trimmed.slice(2))}</p>
+                    <p className="flex-1 text-neutral-200">{parseInline(trimmed.slice(2))}</p>
                   </div>
                 );
               }
               return (
-                <p key={lIdx} className="text-secondary-foreground">
+                <p key={lIdx} className="text-neutral-200">
                   {parseInline(line)}
                 </p>
               );

@@ -13,8 +13,6 @@ export function App() {
   const [selectedRepo, setSelectedRepo] = useState<GithubRepo | null>(null);
   const [currentView, setCurrentView] = useState<"landing" | "dashboard" | "chat">("landing");
   const [toastMessage] = useState<string | null>(null);
-  const [theme, setTheme] = useState<'light' | 'dark'>(() => (localStorage.getItem('devLink_theme') as 'light' | 'dark') || 'dark');
-  useEffect(() => { window.document.documentElement.classList.remove('light', 'dark'); window.document.documentElement.classList.add(theme); localStorage.setItem('devLink_theme', theme); }, [theme]);
   useEffect(() => {
     const urlParams = new URLSearchParams(window.location.search);
     const paramUserId = urlParams.get("userId");
@@ -106,9 +104,9 @@ export function App() {
     }
   };
   return (
-    <div className="min-h-screen bg-background text-foreground font-sans antialiased">
+    <div className="min-h-screen bg-[#050505] text-[#fafafa] font-sans antialiased">
       {toastMessage && (
-        <div className="fixed bottom-6 right-6 z-50 px-5 py-3 bg-card text-foreground border border-border rounded-2xl shadow-2xl text-xs font-medium backdrop-blur-md animate-rise">
+        <div className="fixed bottom-6 right-6 z-50 px-5 py-3 bg-[#0c0c0e] text-white border border-white/20 rounded-2xl shadow-2xl text-xs font-medium backdrop-blur-md animate-rise">
           {toastMessage}
         </div>
       )}
@@ -118,10 +116,10 @@ export function App() {
           exploreUser={localStorage.getItem("devLink_exploreUser")}
           onLogin={handleGitHubLogin}
           onLogout={handleLogout}
-          isDashboard={currentView === 'dashboard'} theme={theme} onToggleTheme={() => setTheme(t => t === 'dark' ? 'light' : 'dark')}
+          isDashboard={currentView === "dashboard"}
         />
       )}
-      <Suspense fallback={<div className="min-h-screen bg-background" />}>
+      <Suspense fallback={<div className="min-h-screen bg-[#050505]" />}>
         {currentView === "landing" && (
           <LandingPage onLogin={handleGitHubLogin} onExplore={() => setCurrentView("dashboard")} />
         )}
@@ -146,5 +144,4 @@ export function App() {
   );
 }
 export default App;
-
 

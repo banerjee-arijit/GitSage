@@ -6,21 +6,21 @@ const GithubIcon = ({ className = "h-4 w-4" }: { className?: string }) => (
 );
 export const Footer = () => {
   return (
-    <footer className="border-t border-border bg-background text-muted-foreground">
+    <footer className="border-t border-white/10 bg-[#050505] text-[#a7a6a6]">
       <div className="container mx-auto max-w-7xl px-6 py-12">
         <div className="flex flex-col md:flex-row items-center justify-between gap-6">
-          <div className="flex items-center gap-3 font-bold text-foreground">
+          <div className="flex items-center gap-3 font-bold text-[#fafafa]">
             <BrandMark className="w-5 h-8" />
             <span className="text-sm uppercase tracking-widest">devLink</span>
           </div>
           <div className="flex items-center gap-6 text-sm font-light">
-            <a href="#features" className="hover:text-foreground transition-colors">
+            <a href="#features" className="hover:text-white transition-colors">
               Features
             </a>
-            <a href="#about" className="hover:text-foreground transition-colors">
+            <a href="#about" className="hover:text-white transition-colors">
               About
             </a>
-            <a href="#faq" className="hover:text-foreground transition-colors">
+            <a href="#faq" className="hover:text-white transition-colors">
               FAQ
             </a>
           </div>
@@ -30,7 +30,7 @@ export const Footer = () => {
               href="https://github.com"
               target="_blank"
               rel="noreferrer"
-              className="text-muted-foreground hover:text-foreground transition-colors"
+              className="text-[#a7a6a6] hover:text-white transition-colors"
             >
               <GithubIcon className="h-4 w-4" />
             </a>
