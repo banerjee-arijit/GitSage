@@ -6,14 +6,14 @@ const GithubIcon = ({ className = "h-4 w-4" }: { className?: string }) => (
 );
 export const Footer = () => {
   return (
-    <footer className="border-t border-white/10 bg-[#050505] text-[#a7a6a6]">
+    <footer className="border-t border-white/10 bg-[#050505] text-neutral-300">
       <div className="container mx-auto max-w-7xl px-6 py-12">
         <div className="flex flex-col md:flex-row items-center justify-between gap-6">
           <div className="flex items-center gap-3 font-bold text-[#fafafa]">
             <BrandMark className="w-5 h-8" />
             <span className="text-sm uppercase tracking-widest">devLink</span>
           </div>
-          <div className="flex items-center gap-6 text-sm font-light">
+          <div className="flex items-center gap-6 text-sm font-normal">
             <a href="#features" className="hover:text-white transition-colors">
               Features
             </a>
@@ -24,13 +24,13 @@ export const Footer = () => {
               FAQ
             </a>
           </div>
-          <div className="flex items-center gap-4 text-xs font-light">
+          <div className="flex items-center gap-4 text-xs font-normal">
             <span>© {new Date().getFullYear()} devLink. All rights reserved.</span>
             <a
               href="https://github.com"
               target="_blank"
               rel="noreferrer"
-              className="text-[#a7a6a6] hover:text-white transition-colors"
+              className="text-neutral-300 hover:text-white transition-colors"
             >
               <GithubIcon className="h-4 w-4" />
             </a>

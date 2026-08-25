@@ -81,15 +81,15 @@ export const Dashboard = ({
       <div className="container mx-auto max-w-7xl px-6">
         <div className="mb-10 flex flex-col md:flex-row md:items-center justify-between gap-6 pb-4">
           <div>
-            <span className="text-xs font-semibold uppercase tracking-widest text-[#a7a6a6]">
+            <span className="text-xs font-semibold uppercase tracking-widest text-neutral-300">
               Workspace
             </span>
-            <h1 className="text-3xl font-light tracking-tight text-white mt-1">
+            <h1 className="text-3xl font-normal tracking-tight text-white mt-1">
               {displayUser 
                 ? "Exploring @" + displayUser 
                 : "Select a Repository"}
             </h1>
-            <p className="text-sm text-[#a7a6a6] mt-1 font-light">
+            <p className="text-sm text-neutral-300 mt-1 font-normal">
               {displayUser 
                 ? "Viewing public repositories for this user. Select one to analyze." 
                 : "Choose any public or private repository from your account to start AI codebase analysis and chat."}
@@ -138,14 +138,14 @@ export const Dashboard = ({
               
                 <button 
                   onClick={() => setIsApiKeyModalOpen(false)}
-                  className="absolute top-5 right-5 text-neutral-500 hover:text-white transition-colors cursor-pointer"
+                  className="absolute top-5 right-5 text-neutral-400 hover:text-white transition-colors cursor-pointer"
                 >
                   <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
                   </svg>
                 </button>
-              <h3 className="text-2xl font-light text-white mb-2">Bring Your Own Key</h3>
-              <p className="text-sm text-[#a7a6a6] mb-6 font-light">
+              <h3 className="text-2xl font-normal text-white mb-2">Bring Your Own Key</h3>
+              <p className="text-sm text-neutral-300 mb-6 font-normal">
                 To use the AI codebase chat, please provide a valid Google Gemini API key.
               </p>
               <div className="bg-[#141414] border border-white/5 rounded-2xl p-4 mb-8">
@@ -155,7 +155,7 @@ export const Dashboard = ({
                   </svg>
                   <span className="text-xs font-semibold uppercase tracking-wider">Privacy Guarantee</span>
                 </div>
-                <p className="text-xs text-[#a7a6a6] leading-relaxed">
+                <p className="text-xs text-neutral-300 leading-relaxed">
                   Your API key is <strong>never</strong> stored in our database. It is saved purely in your browser's local storage (BYOK) and is only temporarily passed to the server to securely communicate with Google during your session.
                 </p>
               </div>
@@ -196,42 +196,42 @@ export const Dashboard = ({
                   Delete Key
                 </button>
               )}
-              <p className="text-[11px] text-neutral-500 text-center mt-4">
-                Don't have one? <a href="https://aistudio.google.com/app/apikey" target="_blank" rel="noreferrer" className="text-[#fdba74] hover:underline">Get a free key from Google AI Studio</a>
+              <p className="text-xs text-neutral-400 text-center mt-4">
+                Don't have one? <a href="https://aistudio.google.com/app/apikey" target="_blank" rel="noreferrer" className="text-orange-300 hover:underline">Get a free key from Google AI Studio</a>
               </p>
             </div>
           </div>
         )}
         <div className="mb-10 flex flex-col md:flex-row items-center justify-between gap-4">
           <div className="relative w-full md:w-96">
-            <Search className="absolute left-4 top-1/2 -translate-y-1/2 h-4 w-4 text-[#a7a6a6]" />
+            <Search className="absolute left-4 top-1/2 -translate-y-1/2 h-4 w-4 text-neutral-300" />
             <Input
               type="text"
               placeholder="Search repositories by name or description..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              className="pl-11 h-11 bg-[#0e0e11] text-white placeholder:text-[#a7a6a6] text-sm rounded-2xl border border-white/10 focus:border-white/20 focus:outline-none focus:ring-0 focus-visible:ring-0 transition-all"
+              className="pl-11 h-11 bg-[#0e0e11] text-white placeholder:text-neutral-300 text-sm rounded-2xl border border-white/10 focus:border-white/20 focus:outline-none focus:ring-0 focus-visible:ring-0 transition-all"
             />
           </div>
           <div className="flex items-center gap-1 bg-[#0e0e11] border border-white/20 p-1 rounded-full w-full md:w-auto shadow-md overflow-x-auto no-scrollbar">
             <button
               style={{ flex: "1 0 auto" }}
               onClick={() => setFilterType("all")}
-              className={"px-4 py-1.5 rounded-full text-xs font-medium transition-all " + (filterType === "all" ? "bg-white text-black font-semibold" : "text-[#a7a6a6] hover:text-white")}
+              className={"px-4 py-1.5 rounded-full text-xs font-medium transition-all " + (filterType === "all" ? "bg-white text-black font-semibold" : "text-neutral-300 hover:text-white")}
             >
               All ({repos.length})
             </button>
             <button
               style={{ flex: "1 0 auto" }}
               onClick={() => setFilterType("public")}
-              className={"px-4 py-1.5 rounded-full text-xs font-medium transition-all " + (filterType === "public" ? "bg-white text-black font-semibold" : "text-[#a7a6a6] hover:text-white")}
+              className={"px-4 py-1.5 rounded-full text-xs font-medium transition-all " + (filterType === "public" ? "bg-white text-black font-semibold" : "text-neutral-300 hover:text-white")}
             >
               Public ({repos.filter((r) => !r.private).length})
             </button>
             <button
               style={{ flex: "1 0 auto" }}
               onClick={() => setFilterType("private")}
-              className={"px-4 py-1.5 rounded-full text-xs font-medium transition-all " + (filterType === "private" ? "bg-white text-black font-semibold" : "text-[#a7a6a6] hover:text-white")}
+              className={"px-4 py-1.5 rounded-full text-xs font-medium transition-all " + (filterType === "private" ? "bg-white text-black font-semibold" : "text-neutral-300 hover:text-white")}
             >
               Private ({repos.filter((r) => r.private).length})
             </button>
@@ -240,7 +240,7 @@ export const Dashboard = ({
         {isLoading ? (
           <div className="flex flex-col items-center justify-center py-28 text-center">
             <Loader2 className="h-9 w-9 text-white animate-spin mb-4" />
-            <p className="text-sm font-light text-[#a7a6a6]">
+            <p className="text-sm font-normal text-neutral-300">
               Fetching your GitHub repositories...
             </p>
           </div>
@@ -256,7 +256,7 @@ export const Dashboard = ({
             <h3 className="text-base font-normal text-white">
               No repositories found
             </h3>
-            <p className="text-xs text-[#a7a6a6] mt-1 max-w-sm font-light">
+            <p className="text-xs text-neutral-300 mt-1 max-w-sm font-normal">
               Try adjusting your search query or filter to find the repository
               you are looking for.
             </p>

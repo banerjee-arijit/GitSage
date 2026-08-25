@@ -90,13 +90,13 @@ export const LandingPage = ({ onConnectGithub, onLogin, onExplore }: LandingPage
         </div>
         <div className="relative z-10 container mx-auto max-w-7xl px-6 pt-36 flex-grow flex flex-col justify-center">
           <main className="max-w-2xl">
-            <h1 className="text-5xl sm:text-7xl font-light tracking-tight leading-[1.08] text-white">
+            <h1 className="text-5xl sm:text-7xl font-normal tracking-tight leading-[1.08] text-white">
               <span className="block">Chat Directly with</span>
-              <span className="block font-light text-orange-300">
+              <span className="block font-normal text-orange-300">
                 Your Codebase
               </span>
             </h1>
-            <p className="mt-8 text-base sm:text-lg font-light text-[#a7a6a6] leading-relaxed max-w-xl">
+            <p className="mt-8 text-base sm:text-lg font-normal text-neutral-300 leading-relaxed max-w-xl">
               Connect your GitHub account, select any public or private
               repository, and ask AI anything about your code with grounded
               Gemini 1.5 Flash intelligence.
@@ -129,13 +129,13 @@ export const LandingPage = ({ onConnectGithub, onLogin, onExplore }: LandingPage
                 setSearchedProfile(null);
                 setSearchUrl("");
               }}
-              className="absolute top-5 right-5 text-neutral-500 hover:text-white transition-colors"
+              className="absolute top-5 right-5 text-neutral-400 hover:text-white transition-colors"
             >
               <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
               </svg>
             </button>
-            <h3 className="text-2xl font-light text-white mb-8">Explore Profile</h3>
+            <h3 className="text-2xl font-normal text-white mb-8">Explore Profile</h3>
             <form 
               onSubmit={(e) => {
                 e.preventDefault();
@@ -176,13 +176,13 @@ export const LandingPage = ({ onConnectGithub, onLogin, onExplore }: LandingPage
                 <img src={searchedProfile.avatar_url} alt="Avatar" className="w-14 h-14 rounded-full bg-[#1c1c1c]" />
                 <div className="flex-1">
                   <h4 className="text-white font-medium text-base">{searchedProfile.name || searchedProfile.login}</h4>
-                  <p className="text-[#a7a6a6] text-xs mt-0.5">@{searchedProfile.login}</p>
-                  <div className="flex items-center gap-3 mt-2 text-[11px] text-neutral-400">
+                  <p className="text-neutral-300 text-xs mt-0.5">@{searchedProfile.login}</p>
+                  <div className="flex items-center gap-3 mt-2 text-xs text-neutral-400">
                     <span>{searchedProfile.public_repos} Repos</span>
                     <span>{searchedProfile.followers} Followers</span>
                   </div>
                 </div>
-                <div className="w-8 h-8 rounded-full bg-[#fdba74]/10 flex items-center justify-center text-[#fdba74]">
+                <div className="w-8 h-8 rounded-full bg-[#fdba74]/10 flex items-center justify-center text-orange-300">
                   <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
                   </svg>
@@ -195,7 +195,7 @@ export const LandingPage = ({ onConnectGithub, onLogin, onExplore }: LandingPage
       <section id="features" className="relative z-10 bg-[#050505] py-24">
         <div className="container mx-auto max-w-7xl px-6">
           <div className="mb-16">
-            <span className="text-xs font-semibold tracking-widest text-[#a7a6a6] uppercase">
+            <span className="text-xs font-semibold tracking-widest text-neutral-300 uppercase">
               ENGINEERED FOR DEVELOPERS
             </span>
             <h2 className="text-3xl sm:text-4xl font-normal text-white mt-2">
@@ -210,7 +210,7 @@ export const LandingPage = ({ onConnectGithub, onLogin, onExplore }: LandingPage
               <h3 className="text-xl font-medium text-white mb-2">
                 GitHub OAuth Control
               </h3>
-              <p className="text-sm text-[#a7a6a6] leading-relaxed font-light">
+              <p className="text-sm text-neutral-300 leading-relaxed font-normal">
                 Authenticate securely with GitHub OAuth. Grant access to public
                 and private repositories with fine-grained read permissions.
               </p>
@@ -222,7 +222,7 @@ export const LandingPage = ({ onConnectGithub, onLogin, onExplore }: LandingPage
               <h3 className="text-xl font-medium text-white mb-2">
                 Live Repo Explorer
               </h3>
-              <p className="text-sm text-[#a7a6a6] leading-relaxed font-light">
+              <p className="text-sm text-neutral-300 leading-relaxed font-normal">
                 Browse all your repositories in a clean dashboard with real-time
                 search, filter badges, and language indicators.
               </p>
@@ -234,7 +234,7 @@ export const LandingPage = ({ onConnectGithub, onLogin, onExplore }: LandingPage
               <h3 className="text-xl font-medium text-white mb-2">
                 Gemini 1.5 RAG Chat
               </h3>
-              <p className="text-sm text-[#a7a6a6] leading-relaxed font-light">
+              <p className="text-sm text-neutral-300 leading-relaxed font-normal">
                 Query your entire codebase with grounded AI responses, file
                 citations, and precise architectural explanations.
               </p>
@@ -246,20 +246,20 @@ export const LandingPage = ({ onConnectGithub, onLogin, onExplore }: LandingPage
         <div className="container mx-auto max-w-4xl px-6">
           <div className="flex items-center gap-3 mb-6">
             <BrandMark className="w-6 h-9" />
-            <span className="text-sm font-semibold tracking-widest uppercase text-[#a7a6a6]">
+            <span className="text-sm font-semibold tracking-widest uppercase text-neutral-300">
               About devLink
             </span>
           </div>
-          <h2 className="text-3xl sm:text-5xl font-light text-white mb-8 leading-tight">
+          <h2 className="text-3xl sm:text-5xl font-normal text-white mb-8 leading-tight">
             The AI-Powered Pair Programmer for Your GitHub Repositories.
           </h2>
-          <p className="text-[#a7a6a6] text-lg leading-relaxed mb-6 font-light">
+          <p className="text-neutral-300 text-lg leading-relaxed mb-6 font-normal">
             Navigating large or unfamiliar repositories is time-consuming.
             devLink bridges your GitHub account with state-of-the-art AI models,
             giving you an instant pair programmer that understands your exact
             code structure.
           </p>
-          <p className="text-[#a7a6a6] text-lg leading-relaxed font-light">
+          <p className="text-neutral-300 text-lg leading-relaxed font-normal">
             Built with Spring Boot 3, Spring AI, MapStruct, MySQL, and React,
             devLink provides low-latency repository indexing and intelligent
             codebase chat capabilities.
@@ -276,7 +276,7 @@ export const LandingPage = ({ onConnectGithub, onLogin, onExplore }: LandingPage
               <h3 className="text-lg font-medium text-white">
                 Does devLink support private repositories?
               </h3>
-              <p className="text-sm text-[#a7a6a6] mt-2 leading-relaxed font-light">
+              <p className="text-sm text-neutral-300 mt-2 leading-relaxed font-normal">
                 Yes! When you log in via GitHub, devLink requests the{" "}
                 <code className="bg-white/10 px-1.5 py-0.5 rounded text-white font-mono text-xs">
                   repo
@@ -289,7 +289,7 @@ export const LandingPage = ({ onConnectGithub, onLogin, onExplore }: LandingPage
               <h3 className="text-lg font-medium text-white">
                 How does the AI analyze my codebase?
               </h3>
-              <p className="text-sm text-[#a7a6a6] mt-2 leading-relaxed font-light">
+              <p className="text-sm text-neutral-300 mt-2 leading-relaxed font-normal">
                 When you select a repository to analyze, devLink indexes your
                 code files into Spring AI vector stores and uses Gemini 1.5
                 Flash RAG to answer queries with precise file citations.
@@ -299,7 +299,7 @@ export const LandingPage = ({ onConnectGithub, onLogin, onExplore }: LandingPage
               <h3 className="text-lg font-medium text-white">
                 Is my code secure?
               </h3>
-              <p className="text-sm text-[#a7a6a6] mt-2 leading-relaxed font-light">
+              <p className="text-sm text-neutral-300 mt-2 leading-relaxed font-normal">
                 Your code remains private. OAuth access tokens are stored
                 securely, and all API interactions occur over encrypted HTTPS
                 connections.

@@ -221,7 +221,7 @@ export const ChatWorkspace = ({ userId, repo, onBack }: ChatWorkspaceProps) => {
               </div>
               assistant-ui
             </div>
-            <button onClick={() => setIsSidebarOpen(false)} className="text-neutral-500 hover:text-white transition-colors cursor-pointer">
+            <button onClick={() => setIsSidebarOpen(false)} className="text-neutral-400 hover:text-white transition-colors cursor-pointer">
               <PanelLeftClose className="w-4 h-4" />
             </button>
           </div>
@@ -269,13 +269,13 @@ export const ChatWorkspace = ({ userId, repo, onBack }: ChatWorkspaceProps) => {
           {!isSidebarOpen && (
             <button 
               onClick={() => setIsSidebarOpen(true)} 
-              className="p-2 mr-2 text-neutral-500 hover:text-white transition-colors cursor-pointer"
+              className="p-2 mr-2 text-neutral-400 hover:text-white transition-colors cursor-pointer"
             >
               <PanelLeft className="w-4.5 h-4.5" />
             </button>
           )}
           <div className="flex items-center gap-2 text-sm font-medium text-neutral-200">
-            <MessageSquare className="w-4 h-4 text-neutral-500" />
+            <MessageSquare className="w-4 h-4 text-neutral-400" />
             {threads.find(t => t.id === activeThreadId)?.title || "Chat"}
           </div>
         </div>
@@ -289,7 +289,7 @@ export const ChatWorkspace = ({ userId, repo, onBack }: ChatWorkspaceProps) => {
               ) : (
                 <div className="w-full self-start text-[#e5e5e5] text-[15px] leading-relaxed max-w-[100%] animate-rise">
                   <FormattedMarkdown content={msg.text} />
-                  <div className="flex items-center gap-3 mt-3 text-neutral-500">
+                  <div className="flex items-center gap-3 mt-3 text-neutral-400">
                     <button className="hover:text-white transition-colors cursor-pointer" title="Copy">
                       <Copy className="w-4 h-4" />
                     </button>
@@ -309,7 +309,7 @@ export const ChatWorkspace = ({ userId, repo, onBack }: ChatWorkspaceProps) => {
           ))}
           {isSending && (
             <div className="w-full self-start text-neutral-400 text-[15px] animate-pulse flex items-center gap-2">
-               <Loader2 className="w-4 h-4 animate-spin text-[#fdba74]" />
+               <Loader2 className="w-4 h-4 animate-spin text-orange-300" />
                Thinking...
             </div>
           )}
@@ -336,7 +336,7 @@ export const ChatWorkspace = ({ userId, repo, onBack }: ChatWorkspaceProps) => {
                     <span className="text-[8px]">✨</span>
                   </span>
                   Gemini 3.6 Flash
-                  <ChevronDown className="w-3 h-3 text-neutral-500" />
+                  <ChevronDown className="w-3 h-3 text-neutral-400" />
                 </button>
               </div>
               <div className="flex items-center gap-2">
@@ -346,7 +346,7 @@ export const ChatWorkspace = ({ userId, repo, onBack }: ChatWorkspaceProps) => {
                 <button 
                   onClick={() => handleSendMessage()}
                   disabled={!inputQuestion.trim() || isSending}
-                  className="w-8 h-8 rounded-full bg-[#fdba74] hover:bg-[#fb923c] disabled:bg-[#27272a] disabled:text-neutral-500 text-white flex items-center justify-center transition-colors cursor-pointer disabled:cursor-not-allowed shadow-md"
+                  className="w-8 h-8 rounded-full bg-[#fdba74] hover:bg-[#fb923c] disabled:bg-[#27272a] disabled:text-neutral-400 text-white flex items-center justify-center transition-colors cursor-pointer disabled:cursor-not-allowed shadow-md"
                 >
                   <ArrowLeft className="w-4 h-4 rotate-90" />
                 </button>

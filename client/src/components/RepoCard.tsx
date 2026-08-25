@@ -20,7 +20,7 @@ export const RepoCard = ({ repo, onAnalyze, isAnalyzing = false }: RepoCardProps
             </h3>
           </div>
           <span
-            className={`inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-[11px] font-medium border shrink-0 ${
+            className={`inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-xs font-medium border shrink-0 ${
               repo.private
                 ? "bg-red-500/10 border-red-500/20 text-red-400"
                 : "bg-white/5 border-white/10 text-neutral-300"
@@ -30,12 +30,12 @@ export const RepoCard = ({ repo, onAnalyze, isAnalyzing = false }: RepoCardProps
             {repo.private ? "Private" : "Public"}
           </span>
         </div>
-        <p className="text-xs text-[#a7a6a6] font-light line-clamp-2 leading-relaxed mb-6">
+        <p className="text-xs text-neutral-300 font-normal line-clamp-2 leading-relaxed mb-6">
           {repo.description || "No description provided for this repository."}
         </p>
       </div>
       <div>
-        <div className="flex items-center justify-between text-[11px] text-[#a7a6a6] pb-4 border-b border-white/5 mb-4">
+        <div className="flex items-center justify-between text-xs text-neutral-300 pb-4 border-b border-white/5 mb-4">
           {repo.language ? (
             <span className="flex items-center gap-1.5 font-medium text-neutral-200">
               <span className="w-2 h-2 rounded-full bg-white inline-block" />
@@ -51,7 +51,7 @@ export const RepoCard = ({ repo, onAnalyze, isAnalyzing = false }: RepoCardProps
             href={repo.html_url}
             target="_blank"
             rel="noreferrer"
-            className="text-xs text-[#a7a6a6] hover:text-white flex items-center gap-1 transition-colors"
+            className="text-xs text-neutral-300 hover:text-white flex items-center gap-1 transition-colors"
           >
             <span>GitHub</span>
             <ExternalLink className="w-3 h-3" />

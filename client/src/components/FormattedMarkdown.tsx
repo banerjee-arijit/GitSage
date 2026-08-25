@@ -52,13 +52,13 @@ export const FormattedMarkdown = ({ content }: FormattedMarkdownProps) => {
               <div className="flex items-center justify-between px-4 py-2 bg-white/5 border-b border-white/10 text-neutral-400">
                 <div className="flex items-center gap-2">
                   <Code2 className="w-3.5 h-3.5 text-sky-400" />
-                  <span className="uppercase tracking-wider text-[11px] font-semibold text-neutral-300">
+                  <span className="uppercase tracking-wider text-xs font-semibold text-neutral-300">
                     {lang}
                   </span>
                 </div>
                 <button
                   onClick={() => handleCopy(codeText, currentCodeIdx)}
-                  className="flex items-center gap-1.5 px-2.5 py-1 rounded bg-white/5 hover:bg-white/10 text-neutral-300 transition-all text-[11px] cursor-pointer"
+                  className="flex items-center gap-1.5 px-2.5 py-1 rounded bg-white/5 hover:bg-white/10 text-neutral-300 transition-all text-xs cursor-pointer"
                 >
                   {copiedIndex === currentCodeIdx ? (
                     <>
