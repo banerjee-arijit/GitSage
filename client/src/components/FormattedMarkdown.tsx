@@ -24,7 +24,7 @@ export const FormattedMarkdown = ({ content }: FormattedMarkdownProps) => {
         return (
           <code
             key={idx}
-            className="px-1.5 py-0.5 rounded bg-white/10 text-sky-300 font-mono text-xs border border-white/10"
+            className="px-1.5 py-0.5 rounded bg-white/10 text-sky-300 font-mono text-xs border border-white/10 break-all"
           >
             {part.slice(1, -1)}
           </code>
@@ -36,7 +36,7 @@ export const FormattedMarkdown = ({ content }: FormattedMarkdownProps) => {
   const blocks = content.split(/(```[\s\S]*?```)/g);
   let codeBlockCounter = 0;
   return (
-    <div className="space-y-3 text-sm leading-relaxed text-neutral-200">
+    <div className="space-y-3 text-sm leading-relaxed text-neutral-200 break-words w-full overflow-hidden">
       {blocks.map((block, bIdx) => {
         if (block.startsWith("```") && block.endsWith("```")) {
           const currentCodeIdx = codeBlockCounter++;

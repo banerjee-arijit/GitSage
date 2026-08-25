@@ -264,7 +264,7 @@ export const ChatWorkspace = ({ userId, repo, onBack }: ChatWorkspaceProps) => {
           </div>
         </div>
       )}
-      <div className="flex-1 flex flex-col relative bg-[#050505]">
+      <div className="flex-1 flex flex-col relative bg-[#050505] min-w-0 w-full">
         <div className="h-14 flex items-center px-4 border-b border-[#1a1a1a] shrink-0">
           {!isSidebarOpen && (
             <button 
@@ -315,7 +315,7 @@ export const ChatWorkspace = ({ userId, repo, onBack }: ChatWorkspaceProps) => {
           )}
           <div ref={messagesEndRef} className="h-24" />
         </div>
-        <div className="absolute bottom-6 left-0 right-0 px-6 lg:px-24 xl:px-48 flex justify-center">
+        <div className="absolute bottom-6 left-0 right-0 px-4 sm:px-6 lg:px-24 xl:px-48 flex justify-center w-full">
           <div className="w-full max-w-4xl bg-[#18181b] rounded-[24px] border border-[#2a2a2a] p-2 flex flex-col shadow-2xl relative transition-all focus-within:border-[#fdba74]/50 focus-within:ring-1 focus-within:ring-[#fdba74]/20">
             <input
               type="text"
@@ -324,7 +324,7 @@ export const ChatWorkspace = ({ userId, repo, onBack }: ChatWorkspaceProps) => {
               onKeyDown={(e) => e.key === "Enter" && handleSendMessage()}
               disabled={isSending}
               placeholder="Send a message... (@ to mention, / for commands)"
-              className="w-full bg-transparent text-white placeholder-neutral-500 text-[15px] px-4 py-3 focus:outline-none disabled:opacity-50"
+              className="w-full bg-transparent text-white placeholder-neutral-500 text-base sm:text-[15px] px-4 py-3 focus:outline-none disabled:opacity-50"
             />
             <div className="flex items-center justify-between px-2 pt-1 pb-1">
               <div className="flex items-center gap-2">
