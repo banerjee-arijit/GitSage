@@ -1,26 +1,29 @@
 import { useState, useMemo } from "react";
-import type { GithubRepo } from "../types/repository";
+import type { GithubRepo, UserProfile } from "../types/repository";
 import { RepoCard } from "../components/RepoCard";
 import { Input } from "../components/ui/input";
 import { Search, Loader2, FolderGit2, RefreshCw } from "lucide-react";
+
 interface DashboardProps {
+  user: UserProfile | null;
   repos: GithubRepo[];
   isLoading: boolean;
   onRefresh: () => void;
   onAnalyzeRepo: (repo: GithubRepo) => void;
 }
+
 export const Dashboard = ({
+  user,
   repos,
   isLoading,
   onRefresh,
   onAnalyzeRepo,
 }: DashboardProps) => {
   const [searchQuery, setSearchQuery] = useState("");
-  const [filterType, setFilterType] = useState<"all" | "public" | "private">(
-    "all",
-  );
-  const [isApiKeyModalOpen, setIsApiKeyModalOpen] = useState(false);
+  const [filterType, setFilterType] = useState<"all" | "public" | "private">("all");
+  const [isApiKeyModalOpen, setIsApiKeyModalOpen] = useState(() => !localStorage.getItem("devLink_customApiKey"));
   const [apiKeyInput, setApiKeyInput] = useState(() => localStorage.getItem("devLink_customApiKey") || "");
+
   const handleSaveApiKey = () => {
     if (apiKeyInput.trim()) {
       localStorage.setItem("devLink_customApiKey", apiKeyInput.trim());
@@ -29,6 +32,15 @@ export const Dashboard = ({
     }
     setIsApiKeyModalOpen(false);
   };
+
+  const handleAnalyzeClick = (repo: GithubRepo) => {
+    if (!localStorage.getItem("devLink_customApiKey")) {
+      setIsApiKeyModalOpen(true);
+      return;
+    }
+    onAnalyzeRepo(repo);
+  };
+
   const filteredRepos = useMemo(() => {
     return repos.filter((repo) => {
       const matchesSearch =
@@ -40,6 +52,10 @@ export const Dashboard = ({
       return matchesSearch;
     });
   }, [repos, searchQuery, filterType]);
+
+  const exploreUser = localStorage.getItem("devLink_exploreUser");
+  const displayUser = exploreUser || user?.githubUsername;
+
   return (
     <div className="min-h-screen bg-[#050505] text-[#fafafa] pt-24 pb-16">
       <div className="container mx-auto max-w-7xl px-6">
@@ -49,12 +65,12 @@ export const Dashboard = ({
               Workspace
             </span>
             <h1 className="text-3xl font-light tracking-tight text-white mt-1">
-              {localStorage.getItem("devLink_exploreUser") 
-                ? `Exploring @${localStorage.getItem("devLink_exploreUser")}` 
+              {displayUser 
+                ? "Exploring @" + displayUser 
                 : "Select a Repository"}
             </h1>
             <p className="text-sm text-[#a7a6a6] mt-1 font-light">
-              {localStorage.getItem("devLink_exploreUser") 
+              {displayUser 
                 ? "Viewing public repositories for this user. Select one to analyze." 
                 : "Choose any public or private repository from your account to start AI codebase analysis and chat."}
             </p>
@@ -74,24 +90,24 @@ export const Dashboard = ({
               disabled={isLoading}
               className="flex items-center gap-2 px-4 py-2 bg-[#121215] text-white rounded-full text-xs font-medium hover:bg-neutral-800 transition-all disabled:opacity-50 shadow-md cursor-pointer"
             >
-              <RefreshCw
-                className={`h-3.5 w-3.5 ${isLoading ? "animate-spin" : ""}`}
-              />
+              <RefreshCw className={"h-3.5 w-3.5 " + (isLoading ? "animate-spin" : "")} />
               <span>Refresh</span>
             </button>
           </div>
         </div>
         {isApiKeyModalOpen && (
-          <div className="fixed inset-0 z-[100] flex items-center justify-center bg-black/60 backdrop-blur-md animate-fade">
+          <div className="fixed inset-0 z-[100] flex items-center justify-center bg-black/60 backdrop-blur-md animate-fade px-4">
             <div className="bg-[#0c0c0e] w-full max-w-md rounded-3xl p-8 shadow-[0_20px_60px_-15px_rgba(0,0,0,1)] relative">
-              <button 
-                onClick={() => setIsApiKeyModalOpen(false)}
-                className="absolute top-5 right-5 text-neutral-500 hover:text-white transition-colors cursor-pointer"
-              >
-                <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-                </svg>
-              </button>
+              {localStorage.getItem("devLink_customApiKey") && (
+                <button 
+                  onClick={() => setIsApiKeyModalOpen(false)}
+                  className="absolute top-5 right-5 text-neutral-500 hover:text-white transition-colors cursor-pointer"
+                >
+                  <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                  </svg>
+                </button>
+              )}
               <h3 className="text-2xl font-light text-white mb-2">Bring Your Own Key</h3>
               <p className="text-sm text-[#a7a6a6] mb-6 font-light">
                 To use the AI codebase chat, please provide a valid Google Gemini API key.
@@ -107,17 +123,17 @@ export const Dashboard = ({
                   Your API key is <strong>never</strong> stored in our database. It is saved purely in your browser's local storage (BYOK) and is only temporarily passed to the server to securely communicate with Google during your session.
                 </p>
               </div>
-              <div className="flex items-center relative mb-2 bg-[#141414] rounded-full p-1.5 focus-within:bg-[#1a1a1a] transition-all shadow-inner">
+              <div className="flex flex-col sm:flex-row items-center gap-2 relative mb-2 bg-[#141414] sm:rounded-full rounded-2xl p-1.5 focus-within:bg-[#1a1a1a] transition-all shadow-inner">
                 <input
                   type="password"
                   value={apiKeyInput}
                   onChange={(e) => setApiKeyInput(e.target.value)}
                   placeholder="AIzaSy..."
-                  className="flex-1 bg-transparent border-none px-4 py-2 text-sm text-white focus:outline-none focus:ring-0 placeholder:text-neutral-600"
+                  className="w-full sm:flex-1 bg-transparent border-none px-4 py-2 text-sm text-white focus:outline-none focus:ring-0 placeholder:text-neutral-600"
                 />
                 <button
                   onClick={handleSaveApiKey}
-                  className="bg-[#fdba74] text-black px-6 py-2.5 rounded-full text-sm font-semibold hover:bg-[#fb923c] transition-all cursor-pointer shadow-md"
+                  className="w-full sm:w-auto bg-[#fdba74] text-black px-6 py-2.5 rounded-full text-sm font-semibold hover:bg-[#fb923c] transition-all cursor-pointer shadow-md"
                 >
                   Save Key
                 </button>
@@ -128,8 +144,8 @@ export const Dashboard = ({
             </div>
           </div>
         )}
-        <div className="mb-10 flex flex-col sm:flex-row items-center justify-between gap-4">
-          <div className="relative w-full sm:w-96">
+        <div className="mb-10 flex flex-col md:flex-row items-center justify-between gap-4">
+          <div className="relative w-full md:w-96">
             <Search className="absolute left-4 top-1/2 -translate-y-1/2 h-4 w-4 text-[#a7a6a6]" />
             <Input
               type="text"
@@ -139,34 +155,22 @@ export const Dashboard = ({
               className="pl-11 h-11 bg-[#0e0e11] text-white placeholder:text-[#a7a6a6] text-sm rounded-2xl border border-white/10 focus:border-white/20 focus:outline-none focus:ring-0 focus-visible:ring-0 transition-all"
             />
           </div>
-          <div className="flex items-center gap-1 bg-[#0e0e11] border border-white/20 p-1 rounded-full w-full sm:w-auto shadow-md">
+          <div className="flex flex-wrap items-center justify-center gap-1 bg-[#0e0e11] border border-white/20 p-1 rounded-full w-full md:w-auto shadow-md">
             <button
               onClick={() => setFilterType("all")}
-              className={`px-4 py-1.5 rounded-full text-xs font-medium transition-all ${
-                filterType === "all"
-                  ? "bg-white text-black font-semibold"
-                  : "text-[#a7a6a6] hover:text-white"
-              }`}
+              className={"px-4 py-1.5 rounded-full text-xs font-medium transition-all " + (filterType === "all" ? "bg-white text-black font-semibold" : "text-[#a7a6a6] hover:text-white")}
             >
               All ({repos.length})
             </button>
             <button
               onClick={() => setFilterType("public")}
-              className={`px-4 py-1.5 rounded-full text-xs font-medium transition-all ${
-                filterType === "public"
-                  ? "bg-white text-black font-semibold"
-                  : "text-[#a7a6a6] hover:text-white"
-              }`}
+              className={"px-4 py-1.5 rounded-full text-xs font-medium transition-all " + (filterType === "public" ? "bg-white text-black font-semibold" : "text-[#a7a6a6] hover:text-white")}
             >
               Public ({repos.filter((r) => !r.private).length})
             </button>
             <button
               onClick={() => setFilterType("private")}
-              className={`px-4 py-1.5 rounded-full text-xs font-medium transition-all ${
-                filterType === "private"
-                  ? "bg-white text-black font-semibold"
-                  : "text-[#a7a6a6] hover:text-white"
-              }`}
+              className={"px-4 py-1.5 rounded-full text-xs font-medium transition-all " + (filterType === "private" ? "bg-white text-black font-semibold" : "text-[#a7a6a6] hover:text-white")}
             >
               Private ({repos.filter((r) => r.private).length})
             </button>
@@ -180,14 +184,12 @@ export const Dashboard = ({
             </p>
           </div>
         ) : filteredRepos.length > 0 ? (
-          /* Repos Grid */
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {filteredRepos.map((repo) => (
-              <RepoCard key={repo.id} repo={repo} onAnalyze={onAnalyzeRepo} />
+              <RepoCard key={repo.id} repo={repo} onAnalyze={handleAnalyzeClick} />
             ))}
           </div>
         ) : (
-          /* Empty State */
           <div className="flex flex-col items-center justify-center py-24 text-center rounded-2xl bg-[#0e0e11]">
             <FolderGit2 className="h-10 w-10 text-neutral-600 mb-3" />
             <h3 className="text-base font-normal text-white">
@@ -203,4 +205,3 @@ export const Dashboard = ({
     </div>
   );
 };
-

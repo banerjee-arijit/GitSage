@@ -55,7 +55,7 @@ export function App() {
       setIsLoadingRepos(true);
       const exploreUser = localStorage.getItem("devLink_exploreUser");
       if (exploreUser) {
-        const res = await fetch(`https://api.github.com/users/${exploreUser}/repos?type=public&sort=updated&per_page=100`);
+        const res = await fetch("https://api.github.com/users/" + exploreUser + "/repos?type=public&sort=updated&per_page=100");
         if (!res.ok) throw new Error("Fetch failed");
         const data = await res.json();
         setRepos(data);
@@ -84,13 +84,18 @@ export function App() {
     setCurrentView("landing");
   };
   const handleAnalyzeRepo = async (repo: GithubRepo) => {
-    if (!userId) {
-      handleGitHubLogin();
-      return;
+    let currentUserId = userId;
+    if (!currentUserId) {
+      let guestId = localStorage.getItem("devLink_guestId");
+      if (!guestId) {
+        guestId = crypto.randomUUID();
+        localStorage.setItem("devLink_guestId", guestId);
+      }
+      currentUserId = guestId;
     }
     try {
       setSelectedRepo(repo);
-      await saveRepoForAnalysis(userId, repo);
+      await saveRepoForAnalysis(currentUserId, repo);
       setCurrentView("chat");
     } catch (err) {
       console.error(err);
@@ -120,15 +125,16 @@ export function App() {
         )}
         {currentView === "dashboard" && (
           <Dashboard
+            user={user}
             repos={repos}
             isLoading={isLoadingRepos}
             onRefresh={loadRepositories}
             onAnalyzeRepo={handleAnalyzeRepo}
           />
         )}
-        {currentView === "chat" && selectedRepo && userId && (
+        {currentView === "chat" && selectedRepo && (
           <ChatWorkspace
-            userId={userId}
+            userId={userId || localStorage.getItem("devLink_guestId")!}
             repo={selectedRepo}
             onBack={() => setCurrentView("dashboard")}
           />
@@ -138,5 +144,4 @@ export function App() {
   );
 }
 export default App;
-
 
