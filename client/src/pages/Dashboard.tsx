@@ -76,15 +76,31 @@ export const Dashboard = ({
             </p>
           </div>
           <div className="flex items-center gap-3">
-            <button
-              onClick={() => setIsApiKeyModalOpen(true)}
-              className="flex items-center gap-2 px-4 py-2 bg-transparent border border-white/20 text-white rounded-full text-xs font-medium hover:bg-white/5 transition-all cursor-pointer"
-            >
-              <svg className="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 7a2 2 0 012 2m4 0a6 6 0 01-7.743 5.743L11 17H9v2H7v2H4a1 1 0 01-1-1v-2.586a1 1 0 01.293-.707l5.964-5.964A6 6 0 1121 9z" />
-              </svg>
-              <span>{localStorage.getItem("devLink_customApiKey") ? "Update API Key" : "Set API Key"}</span>
-            </button>
+            <div className="flex items-center gap-1 bg-transparent border border-white/20 rounded-full p-0.5">
+              <button
+                onClick={() => setIsApiKeyModalOpen(true)}
+                className="flex items-center gap-2 px-3 py-1.5 text-white rounded-full text-xs font-medium hover:bg-white/5 transition-all cursor-pointer"
+              >
+                <svg className="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 7a2 2 0 012 2m4 0a6 6 0 01-7.743 5.743L11 17H9v2H7v2H4a1 1 0 01-1-1v-2.586a1 1 0 01.293-.707l5.964-5.964A6 6 0 1121 9z" />
+                </svg>
+                <span>{localStorage.getItem("devLink_customApiKey") ? "Update Key" : "Set API Key"}</span>
+              </button>
+              {localStorage.getItem("devLink_customApiKey") && (
+                <button
+                  onClick={() => {
+                    localStorage.removeItem("devLink_customApiKey");
+                    setApiKeyInput("");
+                  }}
+                  className="p-1.5 text-neutral-400 hover:text-red-400 hover:bg-red-500/10 rounded-full transition-all cursor-pointer"
+                  title="Remove Key"
+                >
+                  <svg className="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+                  </svg>
+                </button>
+              )}
+            </div>
             <button
               onClick={onRefresh}
               disabled={isLoading}
@@ -204,4 +220,5 @@ export const Dashboard = ({
     </div>
   );
 };
+
 
