@@ -24,7 +24,7 @@ export const FormattedMarkdown = ({ content }: FormattedMarkdownProps) => {
         return (
           <code
             key={idx}
-            className="px-1.5 py-0.5 rounded bg-white/10 text-sky-300 font-mono text-xs border border-white/10 break-all"
+            className="px-1.5 py-0.5 rounded bg-white/10 text-orange-300 font-mono text-xs border border-white/10 break-all"
           >
             {part.slice(1, -1)}
           </code>
@@ -51,7 +51,7 @@ export const FormattedMarkdown = ({ content }: FormattedMarkdownProps) => {
             >
               <div className="flex items-center justify-between px-4 py-2 bg-white/5 border-b border-white/10 text-neutral-400">
                 <div className="flex items-center gap-2">
-                  <Code2 className="w-3.5 h-3.5 text-sky-400" />
+                  <Code2 className="w-3.5 h-3.5 text-orange-400" />
                   <span className="uppercase tracking-wider text-xs font-semibold text-neutral-300">
                     {lang}
                   </span>
@@ -73,7 +73,7 @@ export const FormattedMarkdown = ({ content }: FormattedMarkdownProps) => {
                   )}
                 </button>
               </div>
-              <div className="p-4 overflow-x-auto text-sky-100 bg-[#08080c] leading-relaxed">
+              <div className="p-4 overflow-x-auto text-orange-100 bg-[#08080c] leading-relaxed">
                 <pre>{codeText}</pre>
               </div>
             </div>
@@ -110,7 +110,7 @@ export const FormattedMarkdown = ({ content }: FormattedMarkdownProps) => {
               if (matchOrdered) {
                 return (
                   <div key={lIdx} className="flex items-start gap-2.5 pl-2 py-0.5">
-                    <span className="shrink-0 w-5 h-5 rounded-full bg-white/10 text-sky-300 font-mono text-xs flex items-center justify-center font-bold">
+                    <span className="shrink-0 w-5 h-5 rounded-full bg-white/10 text-orange-300 font-mono text-xs flex items-center justify-center font-bold">
                       {matchOrdered[1]}
                     </span>
                     <p className="flex-1 text-neutral-200">{parseInline(matchOrdered[2])}</p>
@@ -120,7 +120,7 @@ export const FormattedMarkdown = ({ content }: FormattedMarkdownProps) => {
               if (trimmed.startsWith("* ") || trimmed.startsWith("- ")) {
                 return (
                   <div key={lIdx} className="flex items-start gap-2.5 pl-3 py-0.5">
-                    <span className="shrink-0 w-1.5 h-1.5 rounded-full bg-sky-400 mt-2" />
+                    <span className="shrink-0 w-1.5 h-1.5 rounded-full bg-orange-400 mt-2" />
                     <p className="flex-1 text-neutral-200">{parseInline(trimmed.slice(2))}</p>
                   </div>
                 );
