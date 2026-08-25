@@ -13,6 +13,18 @@ export function App() {
   const [selectedRepo, setSelectedRepo] = useState<GithubRepo | null>(null);
   const [currentView, setCurrentView] = useState<"landing" | "dashboard" | "chat">("landing");
   const [toastMessage] = useState<string | null>(null);
+  // Keep-alive ping to prevent Render cold starts while the user is on the site
+  useEffect(() => {
+    const pingInterval = setInterval(() => {
+      fetch("https://gitsage-api.onrender.com/").catch(() => {});
+    }, 2 * 60 * 1000); // 2 minutes
+    
+    // Initial ping on load
+    fetch("https://gitsage-api.onrender.com/").catch(() => {});
+
+    return () => clearInterval(pingInterval);
+  }, []);
+
   useEffect(() => {
     const urlParams = new URLSearchParams(window.location.search);
     const paramUserId = urlParams.get("userId");

@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { BrandMark } from "./BrandMark";
+import {Footer} from './Footer.tsx'
 const GithubIcon = ({ className = "w-4 h-4" }: { className?: string }) => (
   <svg
     className={className}
@@ -308,6 +309,7 @@ export const LandingPage = ({ onConnectGithub, onLogin, onExplore }: LandingPage
           </div>
         </div>
       </section>
+      <Footer/>
     </div>
   );
 };
