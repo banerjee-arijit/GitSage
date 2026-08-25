@@ -3,8 +3,10 @@ import { Lock, Globe, ExternalLink, Sparkles, Code2 } from "lucide-react";
 interface RepoCardProps {
   repo: GithubRepo;
   onAnalyze: (repo: GithubRepo) => void;
+  isAnalyzing?: boolean;
 }
-export const RepoCard = ({ repo, onAnalyze }: RepoCardProps) => {
+import { Loader2 } from "lucide-react";
+export const RepoCard = ({ repo, onAnalyze, isAnalyzing = false }: RepoCardProps) => {
   return (
     <div className="bg-[#0c0c0e] hover:bg-[#0e0e11] border border-white/10 hover:border-white/20 shadow-lg hover:shadow-2xl rounded-2xl p-6 flex flex-col justify-between transition-all duration-300 group">
       <div>
@@ -58,12 +60,13 @@ export const RepoCard = ({ repo, onAnalyze }: RepoCardProps) => {
             onClick={() => onAnalyze(repo)}
             className="h-9 px-4 bg-white text-[#050505] hover:bg-neutral-200 text-xs font-semibold rounded-full transition-all flex items-center gap-1.5 shadow-md active:scale-95 cursor-pointer"
           >
-            <Sparkles className="w-3.5 h-3.5" />
-            <span>Analyze Repo</span>
+            {isAnalyzing ? <Loader2 className="w-3.5 h-3.5 animate-spin" /> : <Sparkles className="w-3.5 h-3.5" />}
+            <span>{isAnalyzing ? "Initializing..." : "Analyze Repo"}</span>
           </button>
         </div>
       </div>
     </div>
   );
 };
+
 

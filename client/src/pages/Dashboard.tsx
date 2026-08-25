@@ -23,6 +23,7 @@ export const Dashboard = ({
   const [filterType, setFilterType] = useState<"all" | "public" | "private">("all");
   const [isApiKeyModalOpen, setIsApiKeyModalOpen] = useState(() => !localStorage.getItem("devLink_customApiKey"));
   const [apiKeyInput, setApiKeyInput] = useState(() => localStorage.getItem("devLink_customApiKey") || "");
+  const [analyzingRepoId, setAnalyzingRepoId] = useState<number | null>(null);
 
   const handleSaveApiKey = () => {
     if (apiKeyInput.trim()) {
@@ -38,6 +39,7 @@ export const Dashboard = ({
       setIsApiKeyModalOpen(true);
       return;
     }
+    setAnalyzingRepoId(repo.id);
     onAnalyzeRepo(repo);
   };
 
@@ -170,20 +172,23 @@ export const Dashboard = ({
               className="pl-11 h-11 bg-[#0e0e11] text-white placeholder:text-[#a7a6a6] text-sm rounded-2xl border border-white/10 focus:border-white/20 focus:outline-none focus:ring-0 focus-visible:ring-0 transition-all"
             />
           </div>
-          <div className="flex flex-wrap items-center justify-center gap-1 bg-[#0e0e11] border border-white/20 p-1 rounded-full w-full md:w-auto shadow-md">
+          <div className="flex items-center gap-1 bg-[#0e0e11] border border-white/20 p-1 rounded-full w-full md:w-auto shadow-md overflow-x-auto no-scrollbar">
             <button
+              style={{ flex: "1 0 auto" }}
               onClick={() => setFilterType("all")}
               className={"px-4 py-1.5 rounded-full text-xs font-medium transition-all " + (filterType === "all" ? "bg-white text-black font-semibold" : "text-[#a7a6a6] hover:text-white")}
             >
               All ({repos.length})
             </button>
             <button
+              style={{ flex: "1 0 auto" }}
               onClick={() => setFilterType("public")}
               className={"px-4 py-1.5 rounded-full text-xs font-medium transition-all " + (filterType === "public" ? "bg-white text-black font-semibold" : "text-[#a7a6a6] hover:text-white")}
             >
               Public ({repos.filter((r) => !r.private).length})
             </button>
             <button
+              style={{ flex: "1 0 auto" }}
               onClick={() => setFilterType("private")}
               className={"px-4 py-1.5 rounded-full text-xs font-medium transition-all " + (filterType === "private" ? "bg-white text-black font-semibold" : "text-[#a7a6a6] hover:text-white")}
             >
@@ -201,7 +206,7 @@ export const Dashboard = ({
         ) : filteredRepos.length > 0 ? (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {filteredRepos.map((repo) => (
-              <RepoCard key={repo.id} repo={repo} onAnalyze={handleAnalyzeClick} />
+              <RepoCard key={repo.id} repo={repo} onAnalyze={handleAnalyzeClick} isAnalyzing={analyzingRepoId === repo.id} />
             ))}
           </div>
         ) : (
@@ -220,5 +225,6 @@ export const Dashboard = ({
     </div>
   );
 };
+
 
 
