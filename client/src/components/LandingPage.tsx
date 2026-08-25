@@ -56,8 +56,8 @@ export const LandingPage = ({ onConnectGithub, onLogin, onExplore }: LandingPage
     }
   };
   return (
-    <div className="relative min-h-screen bg-[#050505] text-[#fafafa] selection:bg-white selection:text-black">
-      <section className="relative h-screen w-full overflow-hidden flex flex-col justify-between bg-[#050505]">
+    <div className="relative min-h-screen bg-background text-foreground selection:bg-foreground selection:text-background">
+      <section className="relative h-screen w-full overflow-hidden flex flex-col justify-between bg-background">
         <div className="absolute inset-0 w-full h-full overflow-hidden pointer-events-none z-0">
           <video
             className="w-full h-full object-contain ml-72 object-center scale-105"
@@ -90,13 +90,13 @@ export const LandingPage = ({ onConnectGithub, onLogin, onExplore }: LandingPage
         </div>
         <div className="relative z-10 container mx-auto max-w-7xl px-6 pt-36 flex-grow flex flex-col justify-center">
           <main className="max-w-2xl">
-            <h1 className="text-5xl sm:text-7xl font-light tracking-tight leading-[1.08] text-white">
+            <h1 className="text-5xl sm:text-7xl font-light tracking-tight leading-[1.08] text-foreground">
               <span className="block">Chat Directly with</span>
               <span className="block font-light text-orange-300">
                 Your Codebase
               </span>
             </h1>
-            <p className="mt-8 text-base sm:text-lg font-light text-[#a7a6a6] leading-relaxed max-w-xl">
+            <p className="mt-8 text-base sm:text-lg font-light text-muted-foreground leading-relaxed max-w-xl">
               Connect your GitHub account, select any public or private
               repository, and ask AI anything about your code with grounded
               Gemini 1.5 Flash intelligence.
@@ -104,14 +104,14 @@ export const LandingPage = ({ onConnectGithub, onLogin, onExplore }: LandingPage
             <div className="mt-10 flex flex-wrap items-center gap-6">
               <button
                 onClick={handleAuth}
-                className="h-12 px-8 bg-white text-[#050505] hover:bg-neutral-200 text-sm font-semibold rounded-full transition-all transform active:scale-95 shadow-2xl flex items-center justify-center gap-2.5 cursor-pointer"
+                className="h-12 px-8 bg-foreground text-background hover:bg-neutral-200 text-sm font-semibold rounded-full transition-all transform active:scale-95 shadow-2xl flex items-center justify-center gap-2.5 cursor-pointer"
               >
-                <GithubIcon className="w-4 h-4 text-[#050505]" />
+                <GithubIcon className="w-4 h-4 text-background" />
                 <span>Connect to GitHub</span>
               </button>
               <button
                 onClick={() => setIsModalOpen(true)}
-                className="h-12 px-8 bg-[#141414] text-white border border-white/10 hover:bg-[#1a1a1a] text-sm font-semibold rounded-full transition-all transform active:scale-95 flex items-center justify-center gap-2.5 cursor-pointer"
+                className="h-12 px-8 bg-card text-foreground border border-border hover:bg-muted text-sm font-semibold rounded-full transition-all transform active:scale-95 flex items-center justify-center gap-2.5 cursor-pointer"
               >
                 <span>Explore Other GitHub</span>
               </button>
@@ -120,7 +120,7 @@ export const LandingPage = ({ onConnectGithub, onLogin, onExplore }: LandingPage
         </div>
       </section>
       {isModalOpen && (
-        <div className="fixed inset-0 z-[100] flex items-center justify-center bg-black/60 backdrop-blur-md animate-fade">
+        <div className="fixed inset-0 z-[100] flex items-center justify-center bg-background/80 backdrop-blur-md animate-fade">
           <div className="w-full max-w-md rounded-3xl p-8  relative">
             <button 
               onClick={() => {
@@ -129,31 +129,31 @@ export const LandingPage = ({ onConnectGithub, onLogin, onExplore }: LandingPage
                 setSearchedProfile(null);
                 setSearchUrl("");
               }}
-              className="absolute top-5 right-5 text-neutral-500 hover:text-white transition-colors"
+              className="absolute top-5 right-5 text-muted-foreground hover:text-foreground transition-colors"
             >
               <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
               </svg>
             </button>
-            <h3 className="text-2xl font-light text-white mb-8">Explore Profile</h3>
+            <h3 className="text-2xl font-light text-foreground mb-8">Explore Profile</h3>
             <form 
               onSubmit={(e) => {
                 e.preventDefault();
                 handleSearchProfile();
               }}
-              className="flex items-center relative mb-8 bg-[#141414] rounded-full p-1.5 focus-within:bg-[#1a1a1a] transition-all shadow-inner"
+              className="flex items-center relative mb-8 bg-card rounded-full p-1.5 focus-within:bg-muted transition-all shadow-inner"
             >
               <input
                 type="text"
                 value={searchUrl}
                 onChange={(e) => setSearchUrl(e.target.value)}
                 placeholder="https://github.com/username"
-                className="flex-1 bg-transparent border-none px-4 py-2 text-sm text-white focus:outline-none focus:ring-0 placeholder:text-neutral-600"
+                className="flex-1 bg-transparent border-none px-4 py-2 text-sm text-foreground focus:outline-none focus:ring-0 placeholder:text-neutral-600"
               />
               <button
                 type="submit"
                 disabled={isSearching || !searchUrl.trim()}
-                className="bg-[#fdba74] text-white px-6 py-2.5 rounded-full text-sm font-medium hover:bg-[#fb923c] transition-all cursor-pointer disabled:opacity-50 shadow-md"
+                className="bg-[#fdba74] text-foreground px-6 py-2.5 rounded-full text-sm font-medium hover:bg-[#fb923c] transition-all cursor-pointer disabled:opacity-50 shadow-md"
               >
                 {isSearching ? "..." : "Search"}
               </button>
@@ -171,13 +171,13 @@ export const LandingPage = ({ onConnectGithub, onLogin, onExplore }: LandingPage
                     window.location.reload(); // Fallback if no prop provided
                   }
                 }}
-                className="flex items-center gap-4 p-4 bg-[#141414] hover:bg-[#1a1a1a] rounded-2xl cursor-pointer transition-all active:scale-[0.98] shadow-sm"
+                className="flex items-center gap-4 p-4 bg-card hover:bg-muted rounded-2xl cursor-pointer transition-all active:scale-[0.98] shadow-sm"
               >
                 <img src={searchedProfile.avatar_url} alt="Avatar" className="w-14 h-14 rounded-full bg-[#1c1c1c]" />
                 <div className="flex-1">
-                  <h4 className="text-white font-medium text-base">{searchedProfile.name || searchedProfile.login}</h4>
-                  <p className="text-[#a7a6a6] text-xs mt-0.5">@{searchedProfile.login}</p>
-                  <div className="flex items-center gap-3 mt-2 text-[11px] text-neutral-400">
+                  <h4 className="text-foreground font-medium text-base">{searchedProfile.name || searchedProfile.login}</h4>
+                  <p className="text-muted-foreground text-xs mt-0.5">@{searchedProfile.login}</p>
+                  <div className="flex items-center gap-3 mt-2 text-[11px] text-muted-foreground">
                     <span>{searchedProfile.public_repos} Repos</span>
                     <span>{searchedProfile.followers} Followers</span>
                   </div>
@@ -192,49 +192,49 @@ export const LandingPage = ({ onConnectGithub, onLogin, onExplore }: LandingPage
           </div>
         </div>
       )}
-      <section id="features" className="relative z-10 bg-[#050505] py-24">
+      <section id="features" className="relative z-10 bg-background py-24">
         <div className="container mx-auto max-w-7xl px-6">
           <div className="mb-16">
-            <span className="text-xs font-semibold tracking-widest text-[#a7a6a6] uppercase">
+            <span className="text-xs font-semibold tracking-widest text-muted-foreground uppercase">
               ENGINEERED FOR DEVELOPERS
             </span>
-            <h2 className="text-3xl sm:text-4xl font-normal text-white mt-2">
+            <h2 className="text-3xl sm:text-4xl font-normal text-foreground mt-2">
               Built for Codebase Analysis & Chat
             </h2>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <div className="bg-[#0c0c0e] border border-white/10 p-8 rounded-2xl">
-              <div className="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center mb-6 text-white font-bold text-sm">
+            <div className="bg-card border border-border p-8 rounded-2xl">
+              <div className="w-10 h-10 rounded-full bg-foreground/10 flex items-center justify-center mb-6 text-foreground font-bold text-sm">
                 01
               </div>
-              <h3 className="text-xl font-medium text-white mb-2">
+              <h3 className="text-xl font-medium text-foreground mb-2">
                 GitHub OAuth Control
               </h3>
-              <p className="text-sm text-[#a7a6a6] leading-relaxed font-light">
+              <p className="text-sm text-muted-foreground leading-relaxed font-light">
                 Authenticate securely with GitHub OAuth. Grant access to public
                 and private repositories with fine-grained read permissions.
               </p>
             </div>
-            <div className="bg-[#0c0c0e] border border-white/10 p-8 rounded-2xl">
-              <div className="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center mb-6 text-white font-bold text-sm">
+            <div className="bg-card border border-border p-8 rounded-2xl">
+              <div className="w-10 h-10 rounded-full bg-foreground/10 flex items-center justify-center mb-6 text-foreground font-bold text-sm">
                 02
               </div>
-              <h3 className="text-xl font-medium text-white mb-2">
+              <h3 className="text-xl font-medium text-foreground mb-2">
                 Live Repo Explorer
               </h3>
-              <p className="text-sm text-[#a7a6a6] leading-relaxed font-light">
+              <p className="text-sm text-muted-foreground leading-relaxed font-light">
                 Browse all your repositories in a clean dashboard with real-time
                 search, filter badges, and language indicators.
               </p>
             </div>
-            <div className="bg-[#0c0c0e] border border-white/10 p-8 rounded-2xl">
-              <div className="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center mb-6 text-white font-bold text-sm">
+            <div className="bg-card border border-border p-8 rounded-2xl">
+              <div className="w-10 h-10 rounded-full bg-foreground/10 flex items-center justify-center mb-6 text-foreground font-bold text-sm">
                 03
               </div>
-              <h3 className="text-xl font-medium text-white mb-2">
+              <h3 className="text-xl font-medium text-foreground mb-2">
                 Gemini 1.5 RAG Chat
               </h3>
-              <p className="text-sm text-[#a7a6a6] leading-relaxed font-light">
+              <p className="text-sm text-muted-foreground leading-relaxed font-light">
                 Query your entire codebase with grounded AI responses, file
                 citations, and precise architectural explanations.
               </p>
@@ -242,64 +242,64 @@ export const LandingPage = ({ onConnectGithub, onLogin, onExplore }: LandingPage
           </div>
         </div>
       </section>
-      <section id="about" className="relative z-10 bg-[#050505] py-24">
+      <section id="about" className="relative z-10 bg-background py-24">
         <div className="container mx-auto max-w-4xl px-6">
           <div className="flex items-center gap-3 mb-6">
             <BrandMark className="w-6 h-9" />
-            <span className="text-sm font-semibold tracking-widest uppercase text-[#a7a6a6]">
+            <span className="text-sm font-semibold tracking-widest uppercase text-muted-foreground">
               About devLink
             </span>
           </div>
-          <h2 className="text-3xl sm:text-5xl font-light text-white mb-8 leading-tight">
+          <h2 className="text-3xl sm:text-5xl font-light text-foreground mb-8 leading-tight">
             The AI-Powered Pair Programmer for Your GitHub Repositories.
           </h2>
-          <p className="text-[#a7a6a6] text-lg leading-relaxed mb-6 font-light">
+          <p className="text-muted-foreground text-lg leading-relaxed mb-6 font-light">
             Navigating large or unfamiliar repositories is time-consuming.
             devLink bridges your GitHub account with state-of-the-art AI models,
             giving you an instant pair programmer that understands your exact
             code structure.
           </p>
-          <p className="text-[#a7a6a6] text-lg leading-relaxed font-light">
+          <p className="text-muted-foreground text-lg leading-relaxed font-light">
             Built with Spring Boot 3, Spring AI, MapStruct, MySQL, and React,
             devLink provides low-latency repository indexing and intelligent
             codebase chat capabilities.
           </p>
         </div>
       </section>
-      <section id="faq" className="relative z-10 bg-[#050505] py-24">
+      <section id="faq" className="relative z-10 bg-background py-24">
         <div className="container mx-auto max-w-4xl px-6">
-          <h2 className="text-3xl sm:text-4xl font-normal text-white mb-12">
+          <h2 className="text-3xl sm:text-4xl font-normal text-foreground mb-12">
             Frequently Asked Questions
           </h2>
           <div className="space-y-8">
-            <div className="border-b border-white/10 pb-6">
-              <h3 className="text-lg font-medium text-white">
+            <div className="border-b border-border pb-6">
+              <h3 className="text-lg font-medium text-foreground">
                 Does devLink support private repositories?
               </h3>
-              <p className="text-sm text-[#a7a6a6] mt-2 leading-relaxed font-light">
+              <p className="text-sm text-muted-foreground mt-2 leading-relaxed font-light">
                 Yes! When you log in via GitHub, devLink requests the{" "}
-                <code className="bg-white/10 px-1.5 py-0.5 rounded text-white font-mono text-xs">
+                <code className="bg-foreground/10 px-1.5 py-0.5 rounded text-foreground font-mono text-xs">
                   repo
                 </code>{" "}
                 scope, enabling support for both public and private GitHub
                 repositories.
               </p>
             </div>
-            <div className="border-b border-white/10 pb-6">
-              <h3 className="text-lg font-medium text-white">
+            <div className="border-b border-border pb-6">
+              <h3 className="text-lg font-medium text-foreground">
                 How does the AI analyze my codebase?
               </h3>
-              <p className="text-sm text-[#a7a6a6] mt-2 leading-relaxed font-light">
+              <p className="text-sm text-muted-foreground mt-2 leading-relaxed font-light">
                 When you select a repository to analyze, devLink indexes your
                 code files into Spring AI vector stores and uses Gemini 1.5
                 Flash RAG to answer queries with precise file citations.
               </p>
             </div>
-            <div className="border-b border-white/10 pb-6">
-              <h3 className="text-lg font-medium text-white">
+            <div className="border-b border-border pb-6">
+              <h3 className="text-lg font-medium text-foreground">
                 Is my code secure?
               </h3>
-              <p className="text-sm text-[#a7a6a6] mt-2 leading-relaxed font-light">
+              <p className="text-sm text-muted-foreground mt-2 leading-relaxed font-light">
                 Your code remains private. OAuth access tokens are stored
                 securely, and all API interactions occur over encrypted HTTPS
                 connections.
